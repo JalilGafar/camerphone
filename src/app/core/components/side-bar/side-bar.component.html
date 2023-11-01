@@ -1,0 +1,9 @@
+<div class="head">
+    <div>
+        <img src="../../../../assets/images/logo_black.png" alt="">
+    </div>
+    <p-sidebar [(visible)]="sidebarVisible" position="right">
+        <p-panelMenu class="head-icon" [model]="items"></p-panelMenu>
+    </p-sidebar>
+    <p-button class="head-icon" (click)="sidebarVisible = true" icon="pi pi-bars"></p-button>
+</div>

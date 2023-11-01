@@ -1,0 +1,21 @@
+.head {
+    display: flex;
+    justify-content: space-between;
+}
+p-sidebar {
+    float: rights;
+}
+.head-icon {
+    float: right;
+}
+img {
+    width: 90px;
+}
+:host ::ng-deep {
+    .p-button {
+        color: #607D8B;
+        background: #e1e7f1;
+        border: none;
+        border-radius: 10px;
+    }
+}

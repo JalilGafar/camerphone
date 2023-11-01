@@ -1,0 +1,7 @@
+
+:host ::ng-deep .p-slidemenu { 
+    border: 4px green; 
+    border-style: dashed; 
+    padding: 8px; 
+    }
+    

@@ -1,0 +1,12 @@
+p-card {
+    display: flex;
+
+}
+
+:host ::ng-deep .p-card-content {
+    padding: 0px;
+}
+
+:host ::ng-deep .ng-star-inserted {
+   
+}

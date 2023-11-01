@@ -1,0 +1,13 @@
+<p-card header={{phone.name}} 
+        [subheader]="" 
+        class="card-content">
+    <ng-template pTemplate="header">
+        <img alt="Card" [src]="phone.image" />
+    </ng-template>
+    <h3> </h3>
+    <span>{{phone.rom}}GB ROM - </span>
+    <span>{{phone.ram}}GB RAM -</span>
+    <span>{{phone.sim}}SIM </span>
+    <ng-template pTemplate="footer">
+    </ng-template>
+</p-card>

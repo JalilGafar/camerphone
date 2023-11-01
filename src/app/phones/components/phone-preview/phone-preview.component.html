@@ -1,0 +1,14 @@
+<div class="fuler">
+    <h3 class="preview-title">Nos offres spéciales 2023</h3>
+    <div class="card-container">
+        <app-phone *ngFor="let phonei of phones" [phone]="phonei"></app-phone>
+    </div>
+    <button>Voir la suite</button>
+</div>
+<div class="fuler">
+    <h3 class="preview-title">Nos Produits Samsung</h3>
+    <div class="card-container">
+        <app-phone *ngFor="let phonei of samsung" [phone]="phonei"></app-phone>
+    </div>
+    <button>Voir la suite</button>
+</div>
