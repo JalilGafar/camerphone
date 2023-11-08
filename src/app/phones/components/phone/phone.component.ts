@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { phoneModel } from 'src/app/core/models/phone-model';
+import { Router } from '@angular/router';
+import { Phone } from '../../Models/phone.model';
 
 @Component({
   selector: 'app-phone',
@@ -8,9 +9,17 @@ import { phoneModel } from 'src/app/core/models/phone-model';
 })
 export class PhoneComponent implements OnInit {
 
-  @Input() phone!: phoneModel;
+  constructor( private  appRout : Router ){}
+
+  @Input() phone!: Phone;
+
+  name!: string;
 
   ngOnInit(): void {
-    
+    this.name = this.phone.marque +' '+this.phone.model;
+  }
+
+  showPhoneDet(id : number) {
+    this.appRout.navigateByUrl('phones/phoneDetail/'+ id);
   }
 }

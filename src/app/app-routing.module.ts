@@ -4,9 +4,11 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [
-    { path: '', component: LandingPageComponent},
+    { path: 'phones', loadChildren: () => import('./phones/phones.module').then( m => m.PhonesModule) },
+    //{ path: 'accueil', component: LandingPageComponent},
     { path: 'contact', component: ContactComponent},
-    { path: 'accueil', component: LandingPageComponent},
+    { path: '', component: LandingPageComponent},
+    { path:'**', redirectTo:''}
 ];
 
 @NgModule({

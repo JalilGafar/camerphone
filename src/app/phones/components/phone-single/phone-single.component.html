@@ -1,1 +1,12 @@
-<p>phone-single works!</p>
+<h4>cette page est dédiée au téléphone :</h4>
+<ng-container *ngIf="phone$|async as data" >
+    <h2> 
+        <span>{{phone.marque}}</span>  
+        <span>{{phone.model}} </span> -
+        <span>{{phone.rom}}</span>GB ROM - 
+        <span>{{phone.ram}} </span>GB RAM - 
+        <span>{{phone.camera}}</span> -
+        <span>{{phone.batteri}}</span> 
+    </h2>
+
+</ng-container>

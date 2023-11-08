@@ -5,6 +5,8 @@ import { SharedModule } from '../shared/shared.module';
 import { PhoneListComponent } from './components/phone-list/phone-list.component';
 import { PhoneSingleComponent } from './components/phone-single/phone-single.component';
 import { PhoneComponent } from './components/phone/phone.component';
+import { PhonesRoutingModule } from './phones-routing.module';
+import { PhoneService } from './services/phone.service';
 
 
 
@@ -17,10 +19,14 @@ import { PhoneComponent } from './components/phone/phone.component';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    PhonesRoutingModule
   ], 
   exports : [
     PhonePreviewComponent
+  ],
+  providers : [
+    PhoneService
   ]
 })
 export class PhonesModule { }

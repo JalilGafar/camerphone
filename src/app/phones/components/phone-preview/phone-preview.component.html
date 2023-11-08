@@ -1,14 +1,25 @@
 <div class="fuler">
     <h3 class="preview-title">Nos offres spéciales 2023</h3>
     <div class="card-container">
-        <app-phone *ngFor="let phonei of phones" [phone]="phonei"></app-phone>
+        <app-phone *ngFor="let phonei of phones$ |async" [phone]="phonei"></app-phone>
     </div>
-    <button>Voir la suite</button>
+    <button routerLink="/phones/marque/:Alcatel">Voir la suite</button>
 </div>
 <div class="fuler">
     <h3 class="preview-title">Nos Produits Samsung</h3>
     <div class="card-container">
-        <app-phone *ngFor="let phonei of samsung" [phone]="phonei"></app-phone>
+        <app-phone *ngFor="let phonei of samsung$ | async" [phone]="phonei"></app-phone>
     </div>
-    <button>Voir la suite</button>
+    <a>
+        <button routerLink="/phones/marque/:samsung" >Voir la suite</button>
+    </a>
+</div>
+<div class="fuler">
+    <h3 class="preview-title">Nos Produits Huawei</h3>
+    <div class="card-container">
+        <app-phone *ngFor="let phonei of huawei$ | async" [phone]="phonei"></app-phone>
+    </div>
+    <a>
+        <button routerLink="/phones/marque/:samsung" >Voir la suite</button>
+    </a>
 </div>

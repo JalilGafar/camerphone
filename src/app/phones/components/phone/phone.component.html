@@ -1,6 +1,7 @@
-<p-card header={{phone.name}} 
+<p-card header={{name}}
         [subheader]="" 
-        class="card-content">
+        class="card-content"
+        (click)="showPhoneDet(phone.id_phone)">
     <ng-template pTemplate="header">
         <img alt="Card" [src]="phone.image" />
     </ng-template>

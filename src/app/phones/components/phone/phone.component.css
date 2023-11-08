@@ -3,8 +3,13 @@ p-card {
 
 }
 
+.card-content{
+    cursor: pointer;
+}
+
 :host ::ng-deep .p-card-content {
     padding: 0px;
+    cursor: pointer;
 }
 
 :host ::ng-deep .ng-star-inserted {
