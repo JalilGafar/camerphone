@@ -1,12 +1,27 @@
-<h4>cette page est dédiée au téléphone :</h4>
-<ng-container *ngIf="phone$|async as data" >
-    <h2> 
-        <span>{{phone.marque}}</span>  
-        <span>{{phone.model}} </span> -
-        <span>{{phone.rom}}</span>GB ROM - 
-        <span>{{phone.ram}} </span>GB RAM - 
-        <span>{{phone.camera}}</span> -
-        <span>{{phone.batteri}}</span> 
-    </h2>
-
-</ng-container>
+<div class="big-container">
+    <ng-container *ngIf="imgArray">
+        <div class="card">
+            <p-galleria [value]="imgArray" [showIndicators]="false" [showItemNavigatorsOnHover]="true" [showItemNavigators]="true" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }" [circular]="true" [numVisible]="5">
+                <ng-template pTemplate="item" let-item>
+                    <img class="imgPhone" [src]="item.itemImageSrc" style="display: block;" />
+                </ng-template>
+                <ng-template pTemplate="thumbnail" let-item>
+                    <div class="grid grid-nogutter justify-content-left">
+                        <img [src]="item.thumbnailImageSrc" style="width: 60px; display: block;" />
+                    </div>
+                </ng-template>
+            </p-galleria>
+        </div>
+    </ng-container>
+    <ng-container  *ngIf="phone" >
+        <h2> 
+            <span>{{phone.marque}}</span>  
+            <span>{{phone.model}} </span> -
+            <span>{{phone.rom}}</span>GB ROM - 
+            <span>{{phone.ram}} </span>GB RAM - 
+            <span>{{phone.camera}}</span> -
+            <span>{{phone.batteri}}</span> 
+        </h2>
+    
+    </ng-container>
+</div>

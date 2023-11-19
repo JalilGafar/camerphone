@@ -3,6 +3,10 @@ p-card {
 
 }
 
+.imgPhone {
+    max-width: 100px;
+}
+
 .card-content{
     cursor: pointer;
 }

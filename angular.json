@@ -15,8 +15,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "customWebpackConfig": {
+                "path": "src/custom-webpack.config.js",
+                "mergeRules": {
+                  "externals": "replace"
+                }
+            },
+            
             "outputPath": "dist/camerphone/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -77,7 +84,10 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "my-project:build"
+          },
           "configurations": {
             "production": {
               "browserTarget": "camerphone:build:production"
@@ -113,8 +123,17 @@
           }
         },
         "server": {
-          "builder": "@angular-devkit/build-angular:server",
+          "builder": "@angular-builders/custom-webpack:server",
           "options": {
+            "customWebpackConfig": {
+              "path": "./extra-webpack.config.ts",
+              "mergeRules": {
+                "module": {
+                  "rules": "prepend"
+                }
+              },
+              "replaceDuplicatePlugins": true
+            },  
             "outputPath": "dist/camerphone/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json"

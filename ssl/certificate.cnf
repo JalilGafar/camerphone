@@ -1,0 +1,20 @@
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+x509_extensions = v3_req
+distinguished_name = req_distinguished_name
+countryName_default  = Cameroon
+stateOrProvinceName_default  = Center
+localityName_default = Yaounde
+0.organizationName_default = JalilWebServices
+OU = Camerphone
+emailAddress = email@camerphone.com
+commonName_default = localhost[v3_req]
+subjectAltName = @alt_names[alt_names]
+DNS.1 = localhost
+
+[req_distinguished_name]
+
+[v3_req]
+1.2.3.4 = ASN1:UTF8String:Something

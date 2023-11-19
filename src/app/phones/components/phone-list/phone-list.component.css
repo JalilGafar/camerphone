@@ -1,0 +1,25 @@
+.fuler {
+    text-align: center;
+    position: relative;
+    padding-top: 40px;
+    display: block;
+}
+
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.preview-title{
+    margin-bottom: 30px;
+}
+app-phone {
+    width: 42%;
+    margin: 5px;
+}
+
+@media screen and (min-width: 600px) {
+    app-phone {
+        max-width: 30%;
+        margin: 5px;
+    }
+}

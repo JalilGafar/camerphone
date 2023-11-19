@@ -2,8 +2,20 @@
     <div style="cursor: pointer;" routerLink="accueil">
         <img src="../../../../assets/images/logo_black.png" alt="">
     </div>
-    <p-sidebar [(visible)]="sidebarVisible" position="right">
-        <p-panelMenu class="head-icon" [model]="items"></p-panelMenu>
-    </p-sidebar>
-    <p-button class="head-icon" (click)="sidebarVisible = true" icon="pi pi-bars"></p-button>
+
+    <div class="flex-container">
+        <div *ngIf="searchBar" class="searching">
+            <input  id="searchbar" pInputText type="text" [formControl]="searchText"/>
+            <p-button icon="pi pi-times" (click)="startSearch()" [rounded]="true" [text]="true" severity="secondary"></p-button>
+        </div>
+        <div>
+            <p-button id="pipi" icon="pi pi-search" (click)="startSearch()" [rounded]="true" severity="secondary" [outlined]="true"></p-button>
+        </div>
+        <div>
+            <p-sidebar [(visible)]="sidebarVisible" position="right" severity="secondary">
+                <p-panelMenu class="head-icon" [model]="items"></p-panelMenu>
+            </p-sidebar>
+            <p-button class="head-icon" (click)="sidebarVisible = true" icon="pi pi-bars"></p-button>
+        </div>
+    </div>
 </div>

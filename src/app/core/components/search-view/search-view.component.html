@@ -1,0 +1,9 @@
+<article class="leaderboard"> 
+    <main class="leaderboard__profiles" *ngFor="let pep of searchResult$|async">
+      <article class="leaderboard__profile" (click)="sectPhone(pep.id)" >
+        <img [src]="pep.image" alt="Mark Zuckerberg" class="leaderboard__picture">
+        <span class="leaderboard__name">{{pep.text}}</span>
+        <span class="leaderboard__value">{{pep.prix}}<span>FCFA</span></span>
+      </article>
+    </main>
+</article>

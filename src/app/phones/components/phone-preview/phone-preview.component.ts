@@ -19,13 +19,16 @@ export class PhonePreviewComponent implements OnInit {
   ngOnInit(){
     this.phoneService.getPhonesFromServer();
     this.phones$ = this.phoneService.phone$.pipe(
-      map(phones => phones.filter(phone => phone.mention === 'special'))
+      map(phones => phones.filter(phone => phone.mention === 'special')),
+      map(phonefilter => phonefilter.slice(0, 4) )
     );
     this.samsung$ = this.phoneService.phone$.pipe(
-      map(phones => phones.filter(phone => phone.marque === 'Samsung'))
+      map(phones => phones.filter(phone => phone.marque === 'Samsung')),
+      map(phonefilter => phonefilter.slice(0, 4) )
     );
     this.huawei$ = this.phoneService.phone$.pipe(
-      map(phones => phones.filter(phone => phone.marque === 'Huawei'))
+      map(phones => phones.filter(phone => phone.marque === 'Huawei')),
+      map(phonefilter => phonefilter.slice(0, 4) )
     );
   }
 }

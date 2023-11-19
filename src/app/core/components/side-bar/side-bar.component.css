@@ -2,8 +2,14 @@
     display: flex;
     justify-content: space-between;
 }
-p-sidebar {
-    float: rights;
+.flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+}
+
+#pipi {
+    float: right;
 }
 .head-icon {
     float: right;

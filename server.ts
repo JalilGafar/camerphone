@@ -3,9 +3,12 @@ import 'zone.js/node';
 import { APP_BASE_HREF } from '@angular/common';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
+//import * as https from 'https';
+//import * as fs from 'fs';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { AppServerModule } from './src/main.server';
+import * as compression from 'compression';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -13,7 +16,10 @@ export function app(): express.Express {
   const distFolder = join(process.cwd(), 'dist/camerphone/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
 
+  server.use(compression());
+  
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/main/modules/express-engine)
+  
   server.engine('html', ngExpressEngine({
     bootstrap: AppServerModule
   }));
@@ -33,6 +39,7 @@ export function app(): express.Express {
     res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
   });
 
+
   return server;
 }
 
@@ -43,7 +50,16 @@ function isRunningOnApachePassenger(): boolean {
 
 function run(): void {
   // Start up the Node server
+
+  // https certificates
+  //const privateKey = fs.readFileSync('../../../ssl/keys/be898_204f5_b7d85c12b3f3e2d8349b3fb9b9e18da5.key');
+  //const certificate = fs.readFileSync('../../../ssl/certs/camerphone_com_be898_204f5_1707436799_66ddc278d25256bfb95d66b03851e28a.crt');
+
+  // Start up the Node server
+  //const server = https.createServer({ key: privateKey, cert: certificate }, app());
+
   const server = app();
+  
 
   if (isRunningOnApachePassenger()) {
     server.listen(() => {
@@ -52,8 +68,10 @@ function run(): void {
     return;
   }
 
-  const port = process.env['PORT'] || 4000;
+  
 
+  const port = process.env['PORT'] || 4000;
+  
   server.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
   });

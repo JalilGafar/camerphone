@@ -3,7 +3,7 @@
     <div class="card-container">
         <app-phone *ngFor="let phonei of phones$ |async" [phone]="phonei"></app-phone>
     </div>
-    <button routerLink="/phones/marque/:Alcatel">Voir la suite</button>
+    <button routerLink="/phones/marque/special">Voir la suite</button>
 </div>
 <div class="fuler">
     <h3 class="preview-title">Nos Produits Samsung</h3>
@@ -11,7 +11,7 @@
         <app-phone *ngFor="let phonei of samsung$ | async" [phone]="phonei"></app-phone>
     </div>
     <a>
-        <button routerLink="/phones/marque/:samsung" >Voir la suite</button>
+        <button routerLink="/phones/marque/Samsung" >Voir la suite</button>
     </a>
 </div>
 <div class="fuler">
@@ -20,6 +20,6 @@
         <app-phone *ngFor="let phonei of huawei$ | async" [phone]="phonei"></app-phone>
     </div>
     <a>
-        <button routerLink="/phones/marque/:samsung" >Voir la suite</button>
+        <button routerLink="/phones/marque/Huawei" >Voir la suite</button>
     </a>
 </div>

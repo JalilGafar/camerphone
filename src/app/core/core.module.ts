@@ -6,6 +6,9 @@ import { SharedModule } from '../shared/shared.module';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { DecouvrirComponent } from './components/decouvrir/decouvrir.component';
 import { PreFooterComponent } from './components/pre-footer/pre-footer.component';
+import { SearchViewComponent } from './components/search-view/search-view.component';
+import { SearchResultComponent } from './components/search-result/search-result.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,16 +18,20 @@ import { PreFooterComponent } from './components/pre-footer/pre-footer.component
     FooterComponent,
     SideBarComponent,
     DecouvrirComponent,
-    PreFooterComponent
+    PreFooterComponent,
+    SearchViewComponent,
+    SearchResultComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     SharedModule
   ],
   exports: [
     HeaderComponent,
     DecouvrirComponent,
     PreFooterComponent,
+    SearchViewComponent,
     FooterComponent
   ]
 })

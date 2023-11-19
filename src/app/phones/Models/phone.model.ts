@@ -2,6 +2,7 @@ export class Phone {
     id_phone!: number;
     marque!: string;
     model!: string;
+    Qte!: number;
     year!:number;
     prix!: number;
     promo!: number;
