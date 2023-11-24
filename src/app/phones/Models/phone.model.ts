@@ -27,4 +27,5 @@ export class Phone {
     note!: number;
     mention!: string;
     comment!: string;
+    version?: string;
 }

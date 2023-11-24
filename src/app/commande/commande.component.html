@@ -1,0 +1,92 @@
+<form [formGroup]="contactForm" class="container">
+    <div class="first">
+        <div class="form-group contact">
+            <label >Pays</label>
+            <input id="disabled-input" placeholder="Cameroun" type="text" pInputText [disabled]="true"/>
+            <small id="username-help">Nous ne livrons pas encore à l'international</small>
+        </div>
+        <div class="form-group contact">
+            <p-dropdown [options]="cities" formControlName="ville" placeholder="Ville"></p-dropdown>
+            <small id="username-help">Dans quelle ville souhaitez vous recevoir votre commande ?</small>
+        </div>
+        <div class="form-group contact">
+            <label >Paiement</label>
+            <input type="text"  pInputText [disabled]="true" placeholder="Paiement en espèce à la livraison">
+        </div>
+        <div class="form-group contact">
+            <span class="p-float-label ">
+                <input pInputText id="nom" formControlName="nom" />
+                <label htmlFor="nom">Nom</label>
+            </span>
+        </div>
+        <div class="form-group contact">
+            <span class="p-float-label ">
+                <input pInputText id="prenom" formControlName="prenom" />
+                <label htmlFor="prenom">Prenom</label>
+            </span>
+        </div>
+        <div class="form-group contact">
+            <span class="p-float-label ">
+                <p-inputNumber inputId="integeronly" prefix="+237 " id="tel" formControlName="tel" />
+                <label htmlFor="tel">Numéro de téléphone</label>
+            </span>
+        </div>
+        <div class="form-group contact">
+            <span class="p-float-label ">
+                <input pInputText id="email" formControlName="email" />
+                <label htmlFor="email">Email</label>
+            </span>
+        </div>
+        <div class="form-group contact">
+            <span class="p-float-label ">
+                <p-inputNumber inputId="integeronly" prefix="+237 " id="tel2" formControlName="tel2" />
+                <label htmlFor="tel2">Autre numéro de téléphone</label>
+            </span>
+        </div>
+        <div class="form-group contact">
+            <span class="p-float-label ">
+                <input pInputText id="livraison" formControlName="livraison" />
+                <label htmlFor="livraison">Lieu de livraison</label>
+            </span>
+        </div>
+        <div class="action-buttons btfirst">
+            <p-button type="submit" (click)="onSubmitForm()" label="Valider ma commande" icon="pi pi-check" iconPos="right" [disabled]="contactForm.invalid" class="p-button-success"></p-button>
+        </div>
+    </div>
+
+    <div class="second">
+        <table class="prod">
+            <ng-container *ngFor="let pep of commande$|async">
+                <tr>
+                    <td>{{pep.quantity}}</td>
+                    <td class="title">{{pep.title}} {{pep.subtitle}}, <span style="color: dimgrey;"> {{pep.color}}</span></td>
+                    <td class="visual"><img class="img-fluid" [src]="pep.image"></td>
+                    <td>{{pep.prix * pep.quantity | currency: 'XAF'}}</td>
+                </tr>
+            </ng-container> 
+        </table>
+        <div class="row">
+            <table class="tab-total">
+                <tr>
+                    <td class="key">Nombre d'article</td>
+                    <td class="val">{{items}} Produits</td>
+                </tr>
+                <tr>
+                    <td class="key">Sous-total</td>
+                    <td class="val">{{prixTotal | currency: 'XAF'}}</td>
+                </tr>
+                <tr>
+                    <td class="key">Livraison</td>
+                    <td class="val">{{1000 | currency: 'XAF'}}</td>
+                </tr>
+                <tr>
+                    <td class="key"><strong>Total</strong></td>
+                    <td class="val"><strong>{{prixTotal + 1000 | currency: 'XAF'}}</strong></td>
+                </tr>
+            </table>
+        </div>
+        <div class="action-buttons btsecond">
+            <p-button type="submit" (click)="onSubmitForm()" label="Valider ma commande" icon="pi pi-check" iconPos="right" [disabled]="contactForm.invalid" class="p-button-success"></p-button>
+        </div>
+    </div>   
+</form>

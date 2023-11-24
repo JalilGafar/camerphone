@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SharedModule } from '../shared/shared.module';
@@ -9,6 +9,7 @@ import { PreFooterComponent } from './components/pre-footer/pre-footer.component
 import { SearchViewComponent } from './components/search-view/search-view.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import * as fr from '@angular/common/locales/fr';
 
 
 
@@ -33,6 +34,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     PreFooterComponent,
     SearchViewComponent,
     FooterComponent
+  ],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'fr-FR'}
   ]
 })
-export class CoreModule { }
+export class CoreModule { 
+  constructor() {
+    registerLocaleData(fr.default);
+  }
+}

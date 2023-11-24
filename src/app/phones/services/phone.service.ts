@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, map, switchMap, take, tap } from "rxjs";
 import { environment } from "src/environments/environment";
 import { Imagess } from "../Models/images.model";
 import { SearcPhone } from "../Models/serach.model";
+import { Colors } from "../Models/colors.model";
 
 @Injectable()
 
@@ -52,14 +53,21 @@ export class PhoneService {
       const colorArray = color.split(" ");
       colorArray.forEach((value, index) => {
         let images = new Imagess;
-        images.itemImageSrc = '../../../assets/images/'+phoneOne.marque+phoneOne.model+' '+value+'-a.webp';
+        images.itemImageSrc = 'assets/images/'+phoneOne.marque+phoneOne.model+' '+value+'-a.webp';
         images.alt = phoneOne.marque+' '+phoneOne.model;
-        images.thumbnailImageSrc = '../../../assets/images/'+phoneOne.marque+phoneOne.model+' '+value+'-a.webp';
+        images.thumbnailImageSrc = 'assets/images/'+phoneOne.marque+phoneOne.model+' '+value+'-a.webp';
         images.title = phoneOne.marque+' '+phoneOne.model;
+        images.color = value;
 
         imagesArray[index] = images;
       } )
       return imagesArray;
+    }
+
+    getPhoneColor(phoneOne : Phone): string [] {
+      let colors = phoneOne.image;
+      const colorArray = colors.split(" ");
+      return colorArray
     }
 
     searchPhone(rech: string): Observable<SearcPhone[]>{
@@ -69,7 +77,7 @@ export class PhoneService {
           phones.forEach((value, index) =>{
             let dataSearc = new SearcPhone; 
             let color = value.image.split(" ")[0]
-            dataSearc.image = '../../../assets/images/'+value.marque+value.model+' '+color+'-a.webp';
+            dataSearc.image = 'assets/images/'+value.marque+value.model+' '+color+'-a.webp';
             dataSearc.text = value.marque+' '+value.model+' - '+value.sim+'SIM - '+value.ram+'GB RAM - '+value.rom+'GB ROM - '+value.camera+' - '+value.batteri
             dataSearc.carac = value.marque+' '+value.model+' '+value.sim+' '+value.ram+' '+value.rom+' '+value.camera+' '+value.batteri
             dataSearc.prix = value.prix;

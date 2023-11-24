@@ -3,4 +3,5 @@ export class Imagess {
     thumbnailImageSrc!: string;
     alt!: string;
     title!: string;
+    color!: string;
 }

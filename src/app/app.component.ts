@@ -7,7 +7,7 @@ import { SideBarComponent } from './core/components/side-bar/side-bar.component'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
   title = 'camerphone';

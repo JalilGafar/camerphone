@@ -13,17 +13,25 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { ContactComponent } from './contact/contact.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { PanierComponent } from './panier/panier.component';
+import { CommandeComponent } from './commande/commande.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EnregistreComponent } from './enregistre/enregistre.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AvisComponent,
     LandingPageComponent,
-    ContactComponent
+    ContactComponent,
+    PanierComponent,
+    CommandeComponent,
+    EnregistreComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     CoreModule,
     SharedModule,
     PhonesModule,

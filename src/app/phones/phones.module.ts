@@ -7,6 +7,7 @@ import { PhoneSingleComponent } from './components/phone-single/phone-single.com
 import { PhoneComponent } from './components/phone/phone.component';
 import { PhonesRoutingModule } from './phones-routing.module';
 import { PhoneService } from './services/phone.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -20,6 +21,7 @@ import { PhoneService } from './services/phone.service';
   imports: [
     CommonModule,
     SharedModule,
+    ReactiveFormsModule,
     PhonesRoutingModule
   ], 
   exports : [

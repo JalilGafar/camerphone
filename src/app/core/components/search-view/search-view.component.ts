@@ -9,7 +9,7 @@ import { MainService } from 'src/app/service';
 @Component({
   selector: 'app-search-view',
   templateUrl: './search-view.component.html',
-  styleUrls: ['./search-view.component.css']
+  styleUrls: ['./search-view.component.scss']
 })
 export class SearchViewComponent implements OnInit{
   

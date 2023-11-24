@@ -5,7 +5,7 @@ import { Phone } from '../../Models/phone.model';
 @Component({
   selector: 'app-phone',
   templateUrl: './phone.component.html',
-  styleUrls: ['./phone.component.css']
+  styleUrls: ['./phone.component.scss']
 })
 export class PhoneComponent implements OnInit {
 
@@ -20,7 +20,7 @@ export class PhoneComponent implements OnInit {
     if (this.phone) {      
       this.name = this.phone.marque +'  '+this.phone.model;
       let image = this.phone.image.split(" ")[0]
-      this.imglocation = '../../../../assets/images/'+this.phone.marque+this.phone.model+' '+image+'-a.webp'
+      this.imglocation = 'assets/images/'+this.phone.marque+this.phone.model+' '+image+'-a.webp'
     }
   }
 

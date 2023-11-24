@@ -6,7 +6,7 @@ import { PhoneService } from '../../services/phone.service';
 @Component({
   selector: 'app-phone-preview',
   templateUrl: './phone-preview.component.html',
-  styleUrls: ['./phone-preview.component.css'],
+  styleUrls: ['./phone-preview.component.scss'],
 })
 export class PhonePreviewComponent implements OnInit {
 

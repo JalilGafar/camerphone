@@ -1,0 +1,100 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    div {
+        padding: 10px;
+        padding-top: 20px;
+    }
+    .first {
+        background-color: #f1f1f1;
+        flex: 50%;
+    }
+
+    .second{
+        background-color: #e8f3f6;
+        flex: 50%;
+    }
+
+    label{
+        display: block;
+    }
+
+    small{
+        display: block;
+        font-size: .75em;
+    }
+
+    input {
+        width: -webkit-fill-available;
+    }
+}
+
+.btn-valid {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: larger;
+}
+
+.action-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.btfirst {
+    display: flex;
+}
+
+.btsecond {
+    display: none;
+}
+
+
+:host ::ng-deep {
+    .p-float-label input.p-filled~label p-float-label .p-inputwrapper-filled~label {
+        top: -0.3rem;
+        font-weight: 600;
+    }
+}
+
+.prod {
+    .title{
+        font-size: small;
+        line-height: normal;
+    }
+    tr{
+        padding-bottom: 10px;
+    }
+    td{
+        padding-right: 10px;
+    }
+    .visual > img {
+        //max-width: 100px;
+    }
+}
+
+.tab-total{
+    .key{
+        text-align: start;
+    }
+    .val{
+        text-align: end;
+    }
+}
+
+@media screen and (max-width: 776px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .btfirst {
+        display: none;
+    }
+    
+    .btsecond {
+        display: flex;
+    }
+    
+}

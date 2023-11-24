@@ -1,3 +1,3 @@
 export class Colors {
-    image!: string;
+    color!: string;
 }

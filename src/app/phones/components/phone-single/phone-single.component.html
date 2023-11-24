@@ -1,27 +1,134 @@
 <div class="big-container">
-    <ng-container *ngIf="imgArray">
-        <div class="card">
-            <p-galleria [value]="imgArray" [showIndicators]="false" [showItemNavigatorsOnHover]="true" [showItemNavigators]="true" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }" [circular]="true" [numVisible]="5">
+    <ng-container *ngIf="imgArray" >
+        <div class="card" class="h-content">
+            <p-galleria [value]="imgArray" [showIndicators]="false" [showItemNavigators]="false" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }" [circular]="true" [numVisible]="5">
                 <ng-template pTemplate="item" let-item>
-                    <img class="imgPhone" [src]="item.itemImageSrc" style="display: block;" />
+                    <img ngOptimizedImage class="imgPhone" [src]="item.itemImageSrc" style="display: block;" />
                 </ng-template>
                 <ng-template pTemplate="thumbnail" let-item>
                     <div class="grid grid-nogutter justify-content-left">
-                        <img [src]="item.thumbnailImageSrc" style="width: 60px; display: block;" />
+                        <img ngOptimizedImage [src]="item.thumbnailImageSrc" style="width: 60px; display: block;" />
                     </div>
                 </ng-template>
             </p-galleria>
         </div>
     </ng-container>
-    <ng-container  *ngIf="phone" >
-        <h2> 
-            <span>{{phone.marque}}</span>  
-            <span>{{phone.model}} </span> -
-            <span>{{phone.rom}}</span>GB ROM - 
-            <span>{{phone.ram}} </span>GB RAM - 
-            <span>{{phone.camera}}</span> -
-            <span>{{phone.batteri}}</span> 
-        </h2>
+    <ng-container  *ngIf="phone">
+        <div class="h-content">
+            <h2> 
+                <span>{{phone.marque}} </span>  
+                <span>{{phone.model}} </span> -
+                <span>{{phone.rom}}</span>GB ROM - 
+                <span>{{phone.ram}} </span>GB RAM - 
+                <span>{{phone.camera}}</span> -
+                <span>{{phone.batteri}}</span> 
+            </h2>
+
+            <div>
+                <div> ⭐⭐⭐⭐ </div>
+                <div>
+                    <span class="prix-aff">{{ phone.prix| currency: 'XAF'  }}  </span>
+                    <span class="prix-prom" >  {{ phone.promo| currency: 'XAF' }}</span>
+                    <span class="promo">   PROMO</span>
+                </div>
+                <div>
+                    <p>Vous économisez <span class="greenPromo"> {{econo | currency: 'XAF'}} !!! </span></p> 
+                </div>
+                <div class="offre">
+                    <img src="" alt=""> <span>Livraison rapide sous 3h</span>
+                </div>
+                <div class="offre">
+                    <img src="" alt=""> <span>Retour gratuit sous 30 jours</span>
+                </div>
+                <div class="offre">
+                    <img src="" alt=""> <span>Paiement à la livraison</span>
+                </div>
+                <div>
+                    <form [formGroup]="laCommande">
+                        <div class="form-group">
+                            <label for="title">Couleur</label>
+                            <p-dropdown id="phone_color" formControlName="phone_color" [options]="phoneColors"></p-dropdown>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Quantité</label>
+                            <p-inputNumber id="phone_color" formControlName="phone_qte" [showButtons]="true" inputId="stacked"   > </p-inputNumber>
+                        </div>
+                        <div class="form-group">
+                            <p-button type="submit" styleClass="p-button-success" (click)="onSubmitForm()">Acheter maintenant</p-button>
+                        </div>
+                    </form>
+                </div>
+                <div class="biento">
+                    <p>La promo se termine bientôt...</p>
+                    <div>
+                        <h3>COMPTE A REBOUR</h3>
+                    </div>
+                    <p>Plus que {{phone.Qte}} en stock </p>
+                </div>
+                <div class="apl">
+                    <h3>APPELER POUR COMMANDER : </h3> <span id="call">698 18 32 97</span>
+                </div>
+                <div class="descri">
+                    <p>
+                        Le <strong>{{phone.marque}} {{phone.model}}</strong> est un smartphone 
+                        Double SIM avec le système d'exploitation <strong>{{phone.systeme}} </strong>,
+                        un écran <strong>{{phone.ecran_taille}} pouces </strong> et un appareil photo principal
+                        de <strong>{{phone.camera}}</strong> avec flash et un appareil photo secondaire de 
+                        <strong>{{phone.camera_front}}</strong>. Il est doté d'une batterie de <strong>{{phone.batteri}}</strong> 
+                        et <strong>{{phone.ram}}Go de RAM + {{phone.rom}}Go </strong> de mémoire avec lecteur <strong>microSD</strong>
+                    </p>
+
+                    <h3>Caractéristiques :</h3>
+                    <ul>
+                        <li><strong>Marque :</strong> {{phone.marque}} </li>
+                        <li><strong>Modèle :</strong> {{phone.model}} </li>
+                        <li *ngIf="phone.version" ><strong>Version :</strong> </li>
+                        <li><strong>ROM :</strong> {{phone.rom}} Go </li>
+                        <li><strong>RAM :</strong> {{phone.ram}} Go </li>
+                        <li><strong>Carte SIM :</strong> {{phone.sim}} SIM </li>
+                        <li><strong>Taille d'écran :</strong> {{phone.ecran_taille}} pouces </li>
+                        <li><strong>Résolution écran :</strong> {{phone.ecran_resolution}} </li>
+                        <li><strong>Type d'écran :</strong> {{phone.ecran_type}} </li>
+                        <li><strong>Système d'exploitation :</strong> {{phone.systeme}} </li>
+                        <li><strong>Processeur :</strong> {{phone.processeur}} </li>
+                        <li><strong>Caméra Frontale :</strong> {{phone.camera_front}} </li>
+                        <li><strong>Caméra Principale :</strong> {{phone.camera}} </li>
+                        <li><strong>Flash arrière :</strong> {{phone.flash_arriere}} </li>
+                        <li><strong>Vidéo :</strong> {{phone.video}} </li>
+                        <li><strong>Connectivité :</strong> {{phone.connectivite}} </li>
+                        <li><strong>Capteur :</strong> {{phone.capteur}} </li>
+                        <li><strong>Batterie (mAh) :</strong> {{phone.batteri}} </li>
+                        <li><strong>Mise en Charge :</strong> {{phone.charge}} </li>
+                        <li><strong>Réseau :</strong> {{phone.reseau}} </li>
+                    </ul>
+                </div>
+
+                <div class="footForm">
+                    <form [formGroup]="laCommande">
+                        <h2> 
+                            <span>{{phone.marque}} </span>  
+                            <span>{{phone.model}} </span> -
+                            <span>{{phone.rom}}</span>GB ROM - 
+                            <span>{{phone.ram}} </span>GB RAM - 
+                            <span>{{phone.camera}}</span> -
+                            <span>{{phone.batteri}}</span> 
+                            <span class="prix-aff">{{ phone.prix| currency: 'XAF'  }}  </span>
+                        </h2>
+                        <div class="form-group">
+                            <label for="title">Couleur</label>
+                            <p-dropdown id="phone_color" formControlName="phone_color" [options]="phoneColors"></p-dropdown>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Quantité</label>
+                            <p-inputNumber id="phone_color" formControlName="phone_qte" [showButtons]="true" inputId="stacked"   > </p-inputNumber>
+                        </div>
+                        <div class="form-group">
+                            <p-button type="submit" styleClass="p-button-success" (click)="onSubmitForm()">Acheter maintenant</p-button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     
     </ng-container>
 </div>
