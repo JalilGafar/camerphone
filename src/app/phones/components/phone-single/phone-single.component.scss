@@ -1,11 +1,30 @@
 .imgPhone {
-    max-width: 100px;
+    max-width: 200px;
 }
 
 :host ::ng-deep .p-galleria .p-galleria-thumbnail-container{
     margin-top: 4px;
     padding-top: 9px;
     background-color: rgb(255, 255, 255);
+}
+
+.wtp{
+    padding-top: 3px;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    img {
+        width: 30px;
+        padding-right: 5px;
+    }
+}
+
+p-button > button
+
+p-button > button, .p-button-success {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
 }
 
 .big-container {
@@ -75,6 +94,11 @@ label {
 :host ::ng-deep .p-inputtext {
     max-width: 80px;
 }
+:host ::ng-deep p-button > button, .p-button-success {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
 
 .apl {
     margin-top: 35px;
@@ -92,6 +116,25 @@ label {
     font-size: large;
 }
 
+.fuler {
+    text-align: center;
+    position: relative;
+    padding-top: 80px;
+    display: block;
+}
+
+.card-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.preview-title{
+    margin-bottom: 30px;
+}
+app-phone {
+    width: 42%;
+    margin: 5px;
+}
+
 @media screen and (min-width: 576px) {
 	.big-container {
         flex-direction: row;
@@ -106,4 +149,11 @@ label {
     .h-content > h2 {
         margin-top: 0;
     }
+
+    :host ::ng-deep .p-button > button {
+        display: block;
+        width: auto;
+        text-align: center;
+    }
 }
+

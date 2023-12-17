@@ -17,6 +17,9 @@ import { PanierComponent } from './panier/panier.component';
 import { CommandeComponent } from './commande/commande.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EnregistreComponent } from './enregistre/enregistre.component';
+import { FaqComponent } from './faq/faq.component';
+import { BlogComponent } from './blog/blog.component';
+import { AproposComponent } from './apropos/apropos.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { EnregistreComponent } from './enregistre/enregistre.component';
     ContactComponent,
     PanierComponent,
     CommandeComponent,
-    EnregistreComponent
+    EnregistreComponent,
+    FaqComponent,
+    BlogComponent,
+    AproposComponent
   ],
   imports: [
     BrowserModule,

@@ -62,6 +62,13 @@ export class SideBarComponent implements OnInit{
                   }
               },
               {
+                  label: 'Google Pixel',
+                  routerLink: 'phones/marque/Google',
+                  command: () => {
+                    this.sidebarVisible = false;
+                  }
+              },
+              {
                   label: 'Tecno',
                   routerLink: 'phones/marque/Tecno',
                   command: () => {
@@ -107,6 +114,7 @@ export class SideBarComponent implements OnInit{
       },
       {
           label: 'Blog',
+          routerLink: 'blog',
           icon: 'pi pi-fw pi-file-edit',
           command: () => {
             this.sidebarVisible = false;
@@ -114,6 +122,7 @@ export class SideBarComponent implements OnInit{
       },
       {
           label: 'A propos',
+          routerLink: 'apropos',
           icon: 'pi pi-fw pi-users',
           command: () => {
             this.sidebarVisible = false;
@@ -121,6 +130,7 @@ export class SideBarComponent implements OnInit{
       },
       {
           label: 'FAQ',
+          routerLink: 'faq',
           icon: 'pi pi-fw pi-comments',
           command: () => {
             this.sidebarVisible = false;

@@ -1,5 +1,3 @@
-import { Commande } from "./commande.model";
-
 export class Achat {
     nom!: string;
     prenom!: string;
@@ -8,5 +6,5 @@ export class Achat {
     tel2!: number;
     email!: string;
     livraison!: string;
-    commandes!: Commande[];
+    achatText!: string;
 }

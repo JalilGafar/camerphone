@@ -1,13 +1,18 @@
 .fuler {
     text-align: center;
     position: relative;
-    padding-top: 40px;
+    padding-top: 80px;
     display: block;
+}
+
+a {
+    text-decoration: auto;
 }
 
 .card-container{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .preview-title{
     margin-bottom: 30px;
@@ -17,10 +22,44 @@ app-phone {
     margin: 5px;
 }
 
+.budgetContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
+.budget {
+    display: grid;
+}
+p-card {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 7px;
+}
+
+:host ::ng-deep .p-tabview-nav {
+    a{
+        text-decoration: auto;
+    }
+}
+
+:host ::ng-deep .p-card-content {
+    padding: 0px;
+}
+
+:host ::ng-deep .p-card-footer {
+    padding: 10px;
+    font-weight: 700;
+}
+
+:host ::ng-deep .p-card-body {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
 
 button {
-    background-color: #4CAF50; /* Green */
+    background-color: #285C2B; /* Green */
     border: none;
     color: white;
     padding: 15px 32px;

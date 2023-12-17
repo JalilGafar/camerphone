@@ -15,8 +15,10 @@ import { Meta, Title } from '@angular/platform-browser';
 export class PhoneListComponent implements OnInit, AfterViewInit {
 
   marque!: string;
-  phones$!: Observable <Phone[]> 
-  phones!: Phone[]
+  phones$!: Observable <Phone[]>; 
+  phones!: Phone[];
+  loading$!: Observable<boolean>;
+
 
   constructor (private route: ActivatedRoute,
               private mainService: MainService,
@@ -34,15 +36,38 @@ export class PhoneListComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     //this.marque = this.route.snapshot.params['mark'];
+    this.loading$ = this.phoneService.loading$;
+    //this.phoneService.setLoadingStatus(true);
     this.route.params.subscribe((params) =>{
-      if (params['mark'] != 'special') {        
-        this.phones$ = this.phoneService.getPhoneByMark(params['mark']);
-        this.marque = params['mark'];
-        this.initMetaForMyPage();
-      } else {
-        this.phones$ = this.phoneService.getSpecial();
-        this.marque = 'spéciaux';
-        this.initMetaForMyPage();
+      if (params['mark'] ) {
+        if (params['mark'] != 'special') {        
+          this.phones$ = this.phoneService.getPhoneByMark(params['mark']);
+          this.marque = 'Nos Produits '+params['mark'];
+          this.initMetaForMyPage();
+          //this.phoneService.setLoadingStatus(false);
+        } else {
+          this.phones$ = this.phoneService.getSpecial();
+          this.marque = 'Nos Produits spéciaux';
+          this.initMetaForMyPage();
+         // this.phoneService.setLoadingStatus(false);
+        }
+      } else if (params['maximum']) {
+        this.phones$ = this.phoneService.getPhoneBudget(params['maximum']);
+        if (params['maximum'] == 50000) {
+          this.marque = 'Nos Produits de moins de 50 000 FCFA';
+        } else if (params['maximum'] == 300000) {
+          this.marque = 'Nos Produits de plus de 250 000 FCFA';
+        } else
+        this.marque = `Nos Produits entre ${params['maximum']-50000} et ${params['maximum']} FCFA`
+      } else if (params['etat']) {
+        this.phones$ = this.phoneService.getPhoneEtat(params['etat']);
+        if (params['etat'] === 'neuf') {
+          this.marque = 'Nos Produits Neuf';
+        } else 
+          this.marque = 'Nos Produits d\'occasion 🗽 en excellent état';
+      } else if (params['ram']) {
+        this.phones$ = this.phoneService.getPhoneByRam(params['ram']);
+          this.marque = `Nos téléphones de ${params['ram']}GB de RAM `;
       }
     });    
   }

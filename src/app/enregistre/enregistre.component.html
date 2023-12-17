@@ -1,4 +1,20 @@
-<h2>
-    votre achat à été enregistré dans notre fiche de commande.
-    Un commercial vous contactera dans quelques minutes.
-</h2>
+<div class="hero-image">
+    <div class="hero-text">
+        <h1 style="font-size:20px">Merci d'avoir fait vos achats chez nous.</h1>
+        <p>Votre soutien compte beaucoup pour nous. N'hésitez pas à revenir vers nous pour nous dire ce que vous pensez de nos produis et services !</p>
+        <button class="avis" (click)="showDialog()">Laisser un avis</button>
+        <button class="return" (click)="store()">Retourner à la boutique</button>
+    </div>
+</div>
+<div class="comment"  [style.display]="visible" >
+
+</div>
+
+<div id="myModal" class="modal" [style.display]="visible">
+  <div class="modal-content">
+    <form [formGroup]="comment">
+        <textarea formControlName="avis"></textarea>  
+        <button type="submit" (click)="onSubmitForm()" [disabled]="comment.invalid">Enregistrer</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+p-card {
+    display: block;
+    padding: 7px;
+    img {
+        height: 65px;
+    }
+    hr {
+        margin: 0px;
+    }
+}
+
+a {
+    text-decoration: auto;
+}
+
+:host ::ng-deep .p-card-content {
+    padding: 0px;
+}
+
+:host ::ng-deep .p-card-footer {
+    padding: 0px;
+}
+
+:host ::ng-deep .p-card-body {
+    padding: 0px;
+    text-align: center;
+}

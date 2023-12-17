@@ -1,6 +1,7 @@
+<p-progressSpinner *ngIf="loading$ | async"></p-progressSpinner>
 <ng-container *ngIf="phones$">
     <div class="fuler">
-        <h3 class="preview-title">Nos Produits {{marque}}</h3>
+        <h3 class="preview-title">{{marque}}</h3>
         <div class="card-container">
             <app-phone *ngFor="let phonei of phones$ | async" [phone]="phonei"></app-phone>
         </div>

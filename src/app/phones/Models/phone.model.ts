@@ -3,6 +3,7 @@ export class Phone {
     marque!: string;
     model!: string;
     Qte!: number;
+    etat!: string;
     year!:number;
     prix!: number;
     promo!: number;

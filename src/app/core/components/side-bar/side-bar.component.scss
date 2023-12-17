@@ -1,6 +1,8 @@
 .head {
     display: flex;
     justify-content: space-between;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 .flex-container {
     display: flex;
@@ -10,6 +12,7 @@
 
 #pipi {
     float: right;
+    padding-right: 5px;
 }
 .head-icon {
     float: right;

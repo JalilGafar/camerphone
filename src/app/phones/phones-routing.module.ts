@@ -5,6 +5,9 @@ import { PhoneSingleComponent } from "./components/phone-single/phone-single.com
 
 const routes : Routes = [
     { path: 'marque/:mark', component: PhoneListComponent },
+    { path: 'budget/:maximum', component: PhoneListComponent },
+    { path: 'etat/:etat', component: PhoneListComponent },
+    { path: 'ram/:ram', component: PhoneListComponent },
     { path: 'phoneDetail/:id', component: PhoneSingleComponent }
   ];
 

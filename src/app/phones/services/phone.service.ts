@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Phone } from "../Models/phone.model";
-import { BehaviorSubject, Observable, map, switchMap, take, tap } from "rxjs";
+import { BehaviorSubject, Observable, delay, map, switchMap, take, tap } from "rxjs";
 import { environment } from "src/environments/environment";
 import { Imagess } from "../Models/images.model";
 import { SearcPhone } from "../Models/serach.model";
@@ -12,36 +12,96 @@ import { Colors } from "../Models/colors.model";
 export class PhoneService {
     constructor(private http: HttpClient) {}
 
+    private _loading$ = new BehaviorSubject<boolean>(false);
+    get loading$(): Observable<boolean> {
+      return this._loading$.asObservable();
+    }
+
     private _phone$ = new BehaviorSubject<Phone[]>([]);
     get phone$(): Observable<Phone[]> {
       return this._phone$.asObservable()
     }
 
+    private lastPhonesLoad = 0;
+
+    private setLoadingStatus(loading: boolean) {
+      this._loading$.next(loading)
+    }
+
     getPhonesFromServer(){
-        this.http.get<Phone[]>(`${environment.apiUrl}/phone`).pipe(
-         tap(domaine =>{
-           this._phone$.next(domaine);
-         })
-         
-       ).subscribe();
+      if (Date.now() - this.lastPhonesLoad <= 1200000) {
+        return;
+      }
+      this.setLoadingStatus(true);
+      this.http.get<Phone[]>(`${environment.apiUrl}/phone`).pipe(
+        delay(1000),
+        tap(phones =>{
+          this.lastPhonesLoad = Date.now();
+          this._phone$.next(phones);
+          this.setLoadingStatus(false);
+        })
+        
+      ).subscribe();
     };
 
     getPhoneById(id: number): Observable<Phone>{
+      if (!this.lastPhonesLoad) {  
         this.getPhonesFromServer();
-        return this.phone$.pipe(
-            map(phones => phones.filter(phone => phone.id_phone === id)[0])
-        );
+      }
+      return this.phone$.pipe(
+          map(phones => phones.filter(phone => phone.id_phone === id)[0])
+      );
     }
 
     getPhoneByMark(mark: string): Observable<Phone[]>{
-      this.getPhonesFromServer();
+      if (!this.lastPhonesLoad) {
+        this.getPhonesFromServer();
+      }
       return this.phone$.pipe(
           map(phones => phones.filter(phone => phone.marque === mark))
+      );
+    };
+
+    getPhoneEtat(etat: string): Observable<Phone[]> {
+      if (!this.lastPhonesLoad) {
+        this.getPhonesFromServer();
+      }
+      return this.phone$.pipe(
+        map(phones => phones.filter(phone => phone.etat === etat))
+    );
+    }
+
+    getPhoneByRam(ram: number): Observable<Phone[]> {
+      if (!this.lastPhonesLoad) {
+        this.getPhonesFromServer();
+      }
+      return this.phone$.pipe(
+        map(phones => phones.filter(phone => phone.ram == ram))
+    );
+    }
+
+    getPhoneBudget(maximum:number): Observable<Phone[]> {
+      if (!this.lastPhonesLoad) {
+        this.getPhonesFromServer();
+      }
+      if (maximum == 50000) {        
+        return this.phone$.pipe(
+            map(phones => phones.filter(phone => phone.prix <= maximum))
+        );
+      } else if (maximum == 300000) {
+        return this.phone$.pipe(
+          map(phones => phones.filter(phone => phone.prix >= 250000))
+        );
+      } else
+      return this.phone$.pipe(
+        map(phones => phones.filter(phone => phone.prix >= maximum-50000 && phone.prix <= maximum))
       );
     }
 
     getSpecial(): Observable<Phone[]> {
-      this.getPhonesFromServer();
+      if (!this.lastPhonesLoad) {
+        this.getPhonesFromServer();
+      }
       return this.phone$.pipe(
         map(phones => phones.filter(phone => phone.mention === 'special'))
     );
@@ -53,9 +113,9 @@ export class PhoneService {
       const colorArray = color.split(" ");
       colorArray.forEach((value, index) => {
         let images = new Imagess;
-        images.itemImageSrc = 'assets/images/'+phoneOne.marque+phoneOne.model+' '+value+'-a.webp';
+        images.itemImageSrc = 'assets/images/'+phoneOne.marque+phoneOne.model+'/'+value+'-a.webp';
         images.alt = phoneOne.marque+' '+phoneOne.model;
-        images.thumbnailImageSrc = 'assets/images/'+phoneOne.marque+phoneOne.model+' '+value+'-a.webp';
+        images.thumbnailImageSrc = 'assets/images/'+phoneOne.marque+phoneOne.model+'/'+value+'-a.webp';
         images.title = phoneOne.marque+' '+phoneOne.model;
         images.color = value;
 
@@ -77,7 +137,7 @@ export class PhoneService {
           phones.forEach((value, index) =>{
             let dataSearc = new SearcPhone; 
             let color = value.image.split(" ")[0]
-            dataSearc.image = 'assets/images/'+value.marque+value.model+' '+color+'-a.webp';
+            dataSearc.image = 'assets/images/'+value.marque+value.model+'/'+color+'-a.webp';
             dataSearc.text = value.marque+' '+value.model+' - '+value.sim+'SIM - '+value.ram+'GB RAM - '+value.rom+'GB ROM - '+value.camera+' - '+value.batteri
             dataSearc.carac = value.marque+' '+value.model+' '+value.sim+' '+value.ram+' '+value.rom+' '+value.camera+' '+value.batteri
             dataSearc.prix = value.prix;

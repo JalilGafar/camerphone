@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class DecouvrirComponent {
 
+  discover(){
+    let c = encodeURI('Je souhaite découvrir les produits de Camerphone !');
+    let url = `https://wa.me/237698183297?text=${c}`
+    window.location.href = url;
+  }
 }

@@ -20,7 +20,17 @@ export class CommandeComponent implements OnInit{
   commande!: Commande[]
   items = 0;
   prixTotal = 0;
-  achat!: Achat; 
+  achat = {
+    nom:'',
+    prenom:'',
+    tel:0,
+    tel2:0,
+    email:'',
+    ville:'',
+    livraison:'',
+    achatText:'',
+  };
+  achatText!: string; 
 
 
   constructor(private formBuilder: FormBuilder,
@@ -43,17 +53,19 @@ export class CommandeComponent implements OnInit{
       this.commande = commande;
       this.items = 0;
       this.prixTotal = 0;
+      this.achatText = '';
       commande.forEach((value, index) => {
         this.items = this.items + value.quantity;
-        this.prixTotal = this.prixTotal + (value.quantity * value.prix)
+        this.prixTotal = this.prixTotal + (value.quantity * value.prix);
+        this.achatText = this.achatText + ' ====>>> '+value.quantity +' | '+value.title+' | '+value.subtitle+' | '+value.color+' | '+value.quantity*value.prix+' FCFA'
       })
     })
   }
 
   onSubmitForm(){
-    this.achat = {...this.contactForm.value, commandes: this.commande};
-    console.log(this.achat);
-    this.mainService.saveComd(this.achat);
+    this.achat = {...this.contactForm.value, achatText: this.achatText};
+    //console.log(this.achat);
+    this.mainService.saveComd(this.achat).subscribe();
     this.appRout.navigate(['enregistre']);
   }
 

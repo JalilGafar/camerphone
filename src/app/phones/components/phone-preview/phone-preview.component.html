@@ -1,25 +1,174 @@
-<div class="fuler">
-    <h3 class="preview-title">Nos offres spéciales 2023</h3>
-    <div class="card-container">
-        <app-phone *ngFor="let phonei of phones$ |async" [phone]="phonei"></app-phone>
-    </div>
-    <button routerLink="/phones/marque/special">Voir la suite</button>
+<div class="brows">
+    <h2>Parcourir par catégories</h2>
+    <p-tabView>
+        <p-tabPanel header="Marque">
+            <div class="card-container">
+                <app-marque *ngFor="let phonei of marques" [marque]="phonei"></app-marque>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Budget">
+            <div class="budgetContainer">
+                <div class="budget" *ngFor="let budgeti of budget">
+                    <a [routerLink]="'phones/budget/'+budgeti">
+                        <p-card class="budget">
+                            <ng-template pTemplate="footer">
+                                <div *ngIf="budgeti === 50000">
+                                    moins de {{budgeti | currency: 'XAF'}}
+                                </div>
+                                <div *ngIf="budgeti != 50000 && budgeti != 300000">
+                                    entre {{budgeti - 50000 | currency: 'XAF'}} et  {{budgeti | currency: 'XAF'}}
+                                </div>
+                                <div *ngIf="budgeti === 300000">
+                                    plud de {{budgeti - 50000 | currency: 'XAF'}}
+                                </div>
+                            </ng-template>
+                        </p-card>
+                    </a>
+                </div>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Etat">
+            <div class="budgetContainer">
+                <a routerLink="phones/etat/neuf">
+                    <p-card class="budget">
+                        <ng-template pTemplate="footer">
+                            Neuf
+                        </ng-template>
+                    </p-card>
+                </a>
+                <a routerLink="phones/etat/occasion">
+                    <p-card class="budget">
+                        <ng-template pTemplate="footer">
+                            Occasion 🗽 en exellent état
+                        </ng-template>
+                    </p-card>
+                </a>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="RAM">
+            <div class="budgetContainer">
+                <div class="budget" *ngFor="let rami of ram">
+                    <a [routerLink]="'phones/ram/'+rami">
+                        <p-card class="budget">
+                            <ng-template pTemplate="footer">
+                               {{rami}} GB de RAM
+                            </ng-template>
+                        </p-card>
+                    </a>
+                </div>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Mémoire">
+            <p>
+                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+                qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+            </p>
+        </p-tabPanel>
+        <p-tabPanel header="Camera">
+            <p>
+                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa
+                qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+            </p>
+        </p-tabPanel>
+    </p-tabView>
 </div>
-<div class="fuler">
-    <h3 class="preview-title">Nos Produits Samsung</h3>
-    <div class="card-container">
-        <app-phone *ngFor="let phonei of samsung$ | async" [phone]="phonei"></app-phone>
+<p-progressSpinner *ngIf="loading$ | async; else phoneGroup"></p-progressSpinner>
+<ng-template #phoneGroup>   
+    <div class="fuler">
+        <h3 class="preview-title">Nos offres spéciales 2023</h3>
+        <div class="card-container">
+            <app-phone *ngFor="let phonei of phones$ |async" [phone]="phonei"></app-phone>
+        </div>
+        <button routerLink="/phones/marque/special">Voir la suite</button>
     </div>
-    <a>
-        <button routerLink="/phones/marque/Samsung" >Voir la suite</button>
-    </a>
-</div>
-<div class="fuler">
-    <h3 class="preview-title">Nos Produits Huawei</h3>
-    <div class="card-container">
-        <app-phone *ngFor="let phonei of huawei$ | async" [phone]="phonei"></app-phone>
+    <div class="fuler" *ngIf="apple$">
+        <h3 class="preview-title">Nos Produits Apple</h3>
+        <div class="card-container">
+            <app-phone *ngFor="let phonei of apple$ | async" [phone]="phonei"></app-phone>
+        </div>
+        <a>
+            <button routerLink="/phones/marque/Apple" >Voir la suite</button>
+        </a>
     </div>
-    <a>
-        <button routerLink="/phones/marque/Huawei" >Voir la suite</button>
-    </a>
-</div>
+    <div class="fuler" *ngIf="samsung$">
+        <h3 class="preview-title">Nos Produits Samsung</h3>
+        <div class="card-container">
+            <app-phone *ngFor="let phonei of samsung$ | async" [phone]="phonei"></app-phone>
+        </div>
+        <a>
+            <button routerLink="/phones/marque/Samsung" >Voir la suite</button>
+        </a>
+    </div>
+    <div class="fuler" *ngIf="huawei$">
+        <h3 class="preview-title">Nos Produits Huawei</h3>
+        <div class="card-container">
+            <app-phone *ngFor="let phonei of huawei$ | async" [phone]="phonei"></app-phone>
+        </div>
+        <a>
+            <button routerLink="/phones/marque/Huawei" >Voir la suite</button>
+        </a>
+    </div>
+    <div class="fuler" *ngIf="google$">
+        <h3 class="preview-title">Nos Produits Google</h3>
+        <div class="card-container">
+            <app-phone *ngFor="let phonei of google$ | async" [phone]="phonei"></app-phone>
+        </div>
+        <a>
+            <button routerLink="/phones/marque/Google" >Voir la suite</button>
+        </a>
+    </div>
+    <div class="fuler" *ngIf="xiaomi$">
+        <h3 class="preview-title">Nos Produits Xiaomi</h3>
+        <div class="card-container">
+            <app-phone *ngFor="let phonei of xiaomi$ | async" [phone]="phonei"></app-phone>
+        </div>
+        <a>
+            <button routerLink="/phones/marque/Xiaomi" >Voir la suite</button>
+        </a>
+    </div>
+    <div class="fuler" *ngIf="infinix$">
+        <h3 class="preview-title">Nos Produits Infinix</h3>
+        <div class="card-container" >
+            <app-phone *ngFor="let phonei of infinix$ | async" [phone]="phonei"></app-phone>
+        </div>
+        <a>
+            <button routerLink="/phones/marque/Infinix" >Voir la suite</button>
+        </a>
+    </div>
+    <div class="fuler" *ngIf="tecno$">
+        <h3 class="preview-title">Nos Produits Tecno</h3>
+        <div class="card-container">
+            <app-phone *ngFor="let phonei of tecno$ | async" [phone]="phonei"></app-phone>
+        </div>
+        <a>
+            <button routerLink="/phones/marque/Tecno" >Voir la suite</button>
+        </a>
+    </div>
+    <div class="fuler" *ngIf="itel$">
+        <h3 class="preview-title">Nos Produits Itel</h3>
+        <div class="card-container">
+            <app-phone *ngFor="let phonei of itel$ | async" [phone]="phonei"></app-phone>
+        </div>
+        <a>
+            <button routerLink="/phones/marque/Itel" >Voir la suite</button>
+        </a>
+    </div>
+    <div class="fuler" *ngIf="alcatel$">
+        <h3 class="preview-title">Nos Produits Alcatel</h3>
+        <div class="card-container">
+            <app-phone *ngFor="let phonei of alcatel$ | async" [phone]="phonei"></app-phone>
+        </div>
+        <a>
+            <button routerLink="/phones/marque/Alcatel" >Voir la suite</button>
+        </a>
+    </div>
+    <div class="fuler" *ngIf="lg$">
+        <h3 class="preview-title">Nos Produits LG</h3>
+        <div class="card-container">
+            <app-phone *ngFor="let phonei of lg$ | async" [phone]="phonei"></app-phone>
+        </div>
+        <a>
+            <button routerLink="/phones/marque/LG" >Voir la suite</button>
+        </a>
+    </div>
+</ng-template>

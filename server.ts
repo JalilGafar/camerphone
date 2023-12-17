@@ -6,17 +6,28 @@ import * as express from 'express';
 //import * as https from 'https';
 //import * as fs from 'fs';
 import { existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { AppServerModule } from './src/main.server';
-import * as compression from 'compression';
+//import * as compression from 'compression';
+import { CommonEngine } from '@angular/ssr';
+import { fileURLToPath } from 'node:url';
+const compression = require('compression');
+
+
+
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server = express();
-  const distFolder = join(process.cwd(), 'dist/camerphone/browser');
-  const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
+  const serverDistFolder = dirname(fileURLToPath(import.meta.url));
+  //const browserDistFolder = resolve(serverDistFolder, '../browser');
+  const browserDistFolder = join(process.cwd(), 'dist/camerphone/browser');
+  //const indexHtml = existsSync(join(browserDistFolder, 'index.original.html')) ? 'index.original.html' : 'index';
+  //const distFolder = join(process.cwd(), 'dist','camerphone', 'browser');
+  const indexHtml = join(browserDistFolder, 'index.html');
+  const commonEngine = new CommonEngine();
 
-  server.use(compression());
+  // server.use(compression());
   
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/main/modules/express-engine)
   
@@ -25,18 +36,57 @@ export function app(): express.Express {
   }));
 
   server.set('view engine', 'html');
-  server.set('views', distFolder);
+  server.set('views', browserDistFolder);
+
+  const shouldCompress =  (req: { headers: { [x: string]: any; }; }, res: any) => {
+    if (req.headers['x-no-compression']) {
+      // don't compress responses if this request header is present
+      return false;
+    }
+
+    // fallback to standard compression
+    return compression.filter(req, res);
+  };
+
+  server.use(compression({
+    // filter decides if the response should be compressed or not,
+    // based on the `shouldCompress` function above
+    filter: shouldCompress,
+    // threshold is the byte threshold for the response body size
+    // before compression is considered, the default is 1kb
+    threshold: 0
+  }));
+ // server.set('views', distFolder);
 
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
   // Serve static files from /browser
-  server.get('*.*', express.static(distFolder, {
+  // server.get('*.*', express.static(distFolder, {
+  //   maxAge: '1y'
+  // }));
+  server.get('*.*', express.static(browserDistFolder, {
     maxAge: '1y'
   }));
 
   // All regular routes use the Universal engine
-  server.get('*', (req, res) => {
-    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+  // server.get('*', (req, res) => {
+  //   res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+  // });
+
+  // All regular routes use the Angular engine
+  server.get('*', (req, res, next) => {
+    const {protocol, originalUrl, baseUrl, headers} = req;
+
+    commonEngine
+        .render({
+          bootstrap: AppServerModule,
+          documentFilePath: indexHtml,
+          url: `${protocol}://${headers.host}${originalUrl}`,
+          publicPath: browserDistFolder,
+          providers: [{provide: APP_BASE_HREF, useValue: req.baseUrl}],
+        })
+        .then((html) => res.send(html))
+        .catch((err) => next(err));
   });
 
 

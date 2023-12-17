@@ -10,6 +10,10 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { AccordionModule } from 'primeng/accordion';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
     exports: [
@@ -22,7 +26,11 @@ import { DialogModule } from 'primeng/dialog';
         DropdownModule,
         InputNumberModule,
         InputTextModule,
-        DialogModule
+        DialogModule,
+        InputTextareaModule,
+        ProgressSpinnerModule,
+        AccordionModule,
+        TabViewModule
     ]
   })
 export class PrimengModule {}

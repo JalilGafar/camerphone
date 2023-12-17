@@ -4,7 +4,7 @@
     </div>
 
     <div class="flex-container">
-        <div *ngIf="searchBar" class="searching">
+        <div *ngIf="searchBar" class="searching" style="padding-right: 3px;">
             <input  id="searchbar" pInputText type="text" [formControl]="searchText"/>
             <p-button icon="pi pi-times" (click)="startSearch()" [rounded]="true" [text]="true" severity="secondary"></p-button>
         </div>

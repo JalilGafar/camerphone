@@ -78,7 +78,9 @@ export class MainService {
         this._command$.next(this.command)
     }
 
-    saveComd (Achat : Achat ): Observable<Achat> {
-        return this.http.post<Achat>(`${environment.apiUrl}/achat`, Achat)
+    saveComd (Achat : {nom: string, prenom: string, ville:string, tel: number, tel2:number
+                        email: string, livraison:string, achatText:string} ): Observable<Achat> {
+        console.log(Achat);
+        return this.http.post<Achat>(`${environment.apiUrl}/achat`, Achat);
      };
 }

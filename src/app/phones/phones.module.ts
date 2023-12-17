@@ -8,6 +8,7 @@ import { PhoneComponent } from './components/phone/phone.component';
 import { PhonesRoutingModule } from './phones-routing.module';
 import { PhoneService } from './services/phone.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MarqueComponent } from './components/marque/marque.component';
 
 
 
@@ -16,7 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     PhonePreviewComponent,
     PhoneListComponent,
     PhoneSingleComponent,
-    PhoneComponent
+    PhoneComponent,
+    MarqueComponent
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,5 @@
-<div class="big-container">
+<div class="big-container" id="boss">
+    <p-progressSpinner *ngIf="loading$ | async "></p-progressSpinner>
     <ng-container *ngIf="imgArray" >
         <div class="card" class="h-content">
             <p-galleria [value]="imgArray" [showIndicators]="false" [showItemNavigators]="false" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }" [circular]="true" [numVisible]="5">
@@ -54,7 +55,8 @@
                             <p-inputNumber id="phone_color" formControlName="phone_qte" [showButtons]="true" inputId="stacked"   > </p-inputNumber>
                         </div>
                         <div class="form-group">
-                            <p-button type="submit" styleClass="p-button-success" (click)="onSubmitForm()">Acheter maintenant</p-button>
+                            <!-- <p-button type="submit"  (click)="onSubmitForm()">Acheter maintenant</p-button> -->
+                            <p-button type="submit" class="wtp" styleClass="p-button-success" (click)="WPSubmitForm()"><img src="assets/images/whatsapp_logo_new-2x.png" alt="">Commander sur WhatsApp</p-button>
                         </div>
                     </form>
                 </div>
@@ -123,12 +125,18 @@
                             <p-inputNumber id="phone_color" formControlName="phone_qte" [showButtons]="true" inputId="stacked"   > </p-inputNumber>
                         </div>
                         <div class="form-group">
-                            <p-button type="submit" styleClass="p-button-success" (click)="onSubmitForm()">Acheter maintenant</p-button>
+                            <p-button type="submit" class="wtp" (click)="onSubmitForm()">Commander en ligne</p-button>
+                            <p-button type="submit" class="wtp" styleClass="p-button-success" (click)="WPSubmitForm()"><img src="assets/images/whatsapp_logo_new-2x.png" alt="">Commander sur WhatsApp</p-button>
                         </div>
                     </form>
+                    <div class="fuler" *ngIf="phonesPotent$" (Click)="goUp()" >
+                        <h3 class="preview-title">Vous Pouriez aimer égalemnt</h3>
+                        <div class="card-container">
+                            <app-phone *ngFor="let phonei of phonesPotent$ |async" [phone]="phonei"></app-phone>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    
     </ng-container>
 </div>

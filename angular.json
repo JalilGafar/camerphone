@@ -23,10 +23,8 @@
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "customWebpackConfig": {
-                "path": "src/custom-webpack.config.js",
-                "mergeRules": {
-                  "externals": "replace"
-                }
+              "path": "src/custom-webpack.config.js",
+              "replaceDuplicatePlugins": true
             },
             
             "outputPath": "dist/camerphone/browser",
@@ -72,14 +70,7 @@
             },
             "development": {
               "buildOptimizer": false,
-              "optimization": {
-                "scripts": true,
-                "styles": {
-                  "minify": true,
-                  "inlineCritical": false
-                },
-                "fonts": true
-              },
+              "optimization": { "scripts": true, "styles": true },
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
@@ -91,6 +82,12 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
+            "customWebpackConfig": {
+              "path": "src/webpack.config.js",
+              "mergeRules": {
+                "externals": "replace"
+              }
+            },
             "browserTarget": "my-project:build"
           },
           "configurations": {
@@ -130,6 +127,7 @@
         "server": {
           "builder": "@angular-builders/custom-webpack:server",
           "options": {
+            "optimization": true,
             "customWebpackConfig": {
               "path": "./extra-webpack.config.ts",
               "mergeRules": {
@@ -146,17 +144,19 @@
           "configurations": {
             "production": {
               "outputHashing": "media",
-              "optimization": {
-                "scripts": true,
-                "styles": {
-                     "minify": true,
-                     "inlineCritical": false
-                     }
-            },
+              "optimization": { "scripts": true, "styles": true },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "cloud": {
+              "fileReplacements": [
+                {
+                  "replace": "src/client/environments/environment.ts",
+                  "with": "src/client/environments/environment.cloud.ts"
                 }
               ]
             },
@@ -187,9 +187,25 @@
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
+            "browserTarget": "camerphone:build",
+            "serverTarget": "camerphone:server",
             "routes": [
-              "/"
-            ]
+              "/",
+              "/#/phones/marque/special",
+              "/#/phones/marque/Samsung",
+              "/#/phones/marque/Apple",
+              "/#/phones/marque/Huawei",
+              "/#/phones/marque/Tecno",
+              "/#/phones/marque/Infinix",
+              "/#/phones/marque/Xiaomi",
+              "/#/phones/marque/Itel",
+              "/#/phones/marque/Alcatel",
+              "/#/blog",
+              "/#/apropos",
+              "/#faq",
+              "/#/contact"
+            ],
+            "guessRoutes": false
           },
           "configurations": {
             "production": {

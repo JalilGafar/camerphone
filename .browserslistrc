@@ -9,9 +9,10 @@
 #   npx browserslist
 
 
-Chrome >= 75
+Chrome >= 60 
 last 1 Firefox version
 last 2 Edge major versions
 last 2 Safari major versions
 last 2 iOS major versions
 Firefox ESR
+
