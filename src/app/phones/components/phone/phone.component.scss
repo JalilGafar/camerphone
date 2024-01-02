@@ -11,6 +11,18 @@ p-card {
     cursor: pointer;
 }
 
+.prix-aff {
+    color: #da2f0c;
+    font-weight: 700;
+
+}
+
+.prix-prom{
+    color: dimgray;
+    font-weight: 700;
+    text-decoration: line-through;
+}
+
 :host ::ng-deep .p-card-content {
     padding: 0px;
     cursor: pointer;

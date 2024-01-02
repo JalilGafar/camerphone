@@ -26,6 +26,8 @@ export class PhonePreviewComponent implements OnInit {
   marques = ['Samsung', 'Apple', 'Huawei', 'Xiaomi', 'Google Pixel', 'Honor', 'Oppo', 'Vivo', 'Infinix', 'Tecno','Itel', 'Realme', 'Sparx', 'Motorola', 'LG']
   budget = [50000, 100000, 150000, 200000, 250000, 300000];
   ram = [2, 3, 4, 6, 8, 16];
+  rom = [32, 64, 128, 256];
+  pixel = [12, 13, 16, 48, 50, 64, 108];
 
   constructor(private phoneService: PhoneService){}
 

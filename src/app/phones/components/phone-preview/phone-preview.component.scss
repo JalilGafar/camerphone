@@ -9,6 +9,12 @@ a {
     text-decoration: auto;
 }
 
+h2 {
+    text-align: center;
+    color: #7a7a7a;
+    padding-top: 11px;
+}
+
 .card-container{
     display: flex;
     flex-wrap: wrap;
@@ -37,6 +43,10 @@ p-card {
     padding: 7px;
 }
 
+
+:host ::ng-deep .p-tabview-title {
+    color: #565656;
+}
 :host ::ng-deep .p-tabview-nav {
     a{
         text-decoration: auto;

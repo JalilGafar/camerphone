@@ -8,6 +8,8 @@ const routes : Routes = [
     { path: 'budget/:maximum', component: PhoneListComponent },
     { path: 'etat/:etat', component: PhoneListComponent },
     { path: 'ram/:ram', component: PhoneListComponent },
+    { path: 'rom/:rom', component: PhoneListComponent },
+    { path: 'cam/:pixel', component: PhoneListComponent },
     { path: 'phoneDetail/:id', component: PhoneSingleComponent }
   ];
 

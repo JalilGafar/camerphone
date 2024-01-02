@@ -67,7 +67,16 @@ export class PhoneListComponent implements OnInit, AfterViewInit {
           this.marque = 'Nos Produits d\'occasion 🗽 en excellent état';
       } else if (params['ram']) {
         this.phones$ = this.phoneService.getPhoneByRam(params['ram']);
-          this.marque = `Nos téléphones de ${params['ram']}GB de RAM `;
+        this.marque = `Nos téléphones de ${params['ram']}GB de RAM `;
+      } else if (params['rom']) {
+        this.phones$ = this.phoneService.getPhoneByRom(params['rom']);
+        if (params['rom'] != 256) {          
+          this.marque = `Nos téléphones de ${params['rom']} GB de Mémoire `;
+        } else
+        this.marque = `Nos téléphones de ${params['rom']}GB et Plus de Mémoire `;
+      } else if (params['pixel']) {
+        this.phones$ = this.phoneService.getPhoneByCam(params['pixel']);
+        this.marque = `Nos téléphones de ${params['pixel']} Mega Pixel`;
       }
     });    
   }

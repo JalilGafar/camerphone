@@ -8,7 +8,10 @@
     <h3> </h3>
     <span>{{phone.rom}}GB ROM - </span>
     <span>{{phone.ram}}GB RAM -</span>
-    <span>{{phone.sim}}SIM </span>
+    <span>{{phone.sim}}SIM -</span>
+    <span>{{phone.camera}} </span>
     <ng-template pTemplate="footer">
+        <span class="prix-aff">{{ phone.prix| currency: 'XAF'  }}  </span>
+        <span class="prix-prom" >  {{ phone.promo| currency: 'XAF' }}</span>
     </ng-template>
 </p-card>

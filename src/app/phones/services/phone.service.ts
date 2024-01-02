@@ -29,7 +29,7 @@ export class PhoneService {
     }
 
     getPhonesFromServer(){
-      if (Date.now() - this.lastPhonesLoad <= 1200000) {
+      if (Date.now() - this.lastPhonesLoad <= 60000) {
         return;
       }
       this.setLoadingStatus(true);
@@ -58,7 +58,9 @@ export class PhoneService {
         this.getPhonesFromServer();
       }
       return this.phone$.pipe(
-          map(phones => phones.filter(phone => phone.marque === mark))
+          map(phones => phones.filter(phone => phone.marque === mark).sort((a,b)=> {
+            return b.note - a.note;
+        }) )
       );
     };
 
@@ -77,8 +79,32 @@ export class PhoneService {
       }
       return this.phone$.pipe(
         map(phones => phones.filter(phone => phone.ram == ram))
-    );
+      );
+    };
+    
+
+    getPhoneByRom(rom: number): Observable<Phone[]> {
+      if (!this.lastPhonesLoad) {
+        this.getPhonesFromServer();
+      }
+      if (rom != 256 ) {
+        return this.phone$.pipe(
+          map(phones => phones.filter(phone => phone.rom == rom))
+        );
+      } else
+      return this.phone$.pipe(
+        map(phones => phones.filter(phone => phone.rom >= rom))
+      );
     }
+
+    getPhoneByCam(pixel: number): Observable<Phone[]> {
+      if (!this.lastPhonesLoad) {
+        this.getPhonesFromServer();
+      }
+      return this.phone$.pipe(
+        map(phones => phones.filter(phone => phone.pixel == pixel))
+      );
+    };
 
     getPhoneBudget(maximum:number): Observable<Phone[]> {
       if (!this.lastPhonesLoad) {

@@ -2,6 +2,7 @@ import 'zone.js/node';
 
 import { APP_BASE_HREF } from '@angular/common';
 import { ngExpressEngine } from '@nguniversal/express-engine';
+///import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
 import * as express from 'express';
 //import * as https from 'https';
 //import * as fs from 'fs';
@@ -11,7 +12,11 @@ import { AppServerModule } from './src/main.server';
 //import * as compression from 'compression';
 import { CommonEngine } from '@angular/ssr';
 import { fileURLToPath } from 'node:url';
-const compression = require('compression');
+import * as compression from 'compression';
+import * as bodyParser from 'body-parser';
+import { ParamsDictionary } from 'express-serve-static-core';
+import { ParsedQs } from 'qs';
+import * as cors from 'cors';
 
 
 
@@ -24,8 +29,10 @@ export function app(): express.Express {
   const browserDistFolder = join(process.cwd(), 'dist/camerphone/browser');
   //const indexHtml = existsSync(join(browserDistFolder, 'index.original.html')) ? 'index.original.html' : 'index';
   //const distFolder = join(process.cwd(), 'dist','camerphone', 'browser');
-  const indexHtml = join(browserDistFolder, 'index.html');
-  const commonEngine = new CommonEngine();
+  //const indexHtml = join(browserDistFolder, 'index.html');
+  //const commonEngine = new CommonEngine();
+  //const { AppModuleNgFactory, LAZY_MODULE_MAP } = require('main.bundle.js');
+  //const DIST_FOLDER = join(__dirname, 'browser');
 
   // server.use(compression());
   
@@ -37,8 +44,9 @@ export function app(): express.Express {
 
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
+  //server.set('views', DIST_FOLDER);
 
-  const shouldCompress =  (req: { headers: { [x: string]: any; }; }, res: any) => {
+  const shouldCompress =  (req: express.Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: express.Response<any, Record<string, any>>) => {
     if (req.headers['x-no-compression']) {
       // don't compress responses if this request header is present
       return false;
@@ -47,6 +55,9 @@ export function app(): express.Express {
     // fallback to standard compression
     return compression.filter(req, res);
   };
+
+ // server.use(compression());
+  server.use(cors())
 
   server.use(compression({
     // filter decides if the response should be compressed or not,
@@ -75,18 +86,19 @@ export function app(): express.Express {
 
   // All regular routes use the Angular engine
   server.get('*', (req, res, next) => {
-    const {protocol, originalUrl, baseUrl, headers} = req;
+    res.render('index', { req });
+    // const {protocol, originalUrl, baseUrl, headers} = req;
 
-    commonEngine
-        .render({
-          bootstrap: AppServerModule,
-          documentFilePath: indexHtml,
-          url: `${protocol}://${headers.host}${originalUrl}`,
-          publicPath: browserDistFolder,
-          providers: [{provide: APP_BASE_HREF, useValue: req.baseUrl}],
-        })
-        .then((html) => res.send(html))
-        .catch((err) => next(err));
+    // commonEngine
+    //     .render({
+    //       bootstrap: AppServerModule,
+    //       documentFilePath: indexHtml,
+    //       url: `${protocol}://${headers.host}${originalUrl}`,
+    //       publicPath: browserDistFolder,
+    //       providers: [{provide: APP_BASE_HREF, useValue: req.baseUrl}],
+    //     })
+    //     .then((html) => res.send(html))
+    //     .catch((err) => next(err));
   });
 
 
@@ -121,6 +133,8 @@ function run(): void {
   
 
   const port = process.env['PORT'] || 4000;
+  const DIST_FOLDER = join(__dirname, 'browser');
+  //const {AppServerModuleNgFactory, LAZY_MODULE_MAP, ngExpressEngine, provideModuleMap} = require('./dist/server/main');
   
   server.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);

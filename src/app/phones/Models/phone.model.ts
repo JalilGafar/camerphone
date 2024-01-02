@@ -17,6 +17,7 @@ export class Phone {
     processeur!: string;
     camera_front!: string;
     camera!: string;
+    pixel!: number;
     flash_arriere!: string;
     video!: string;
     connectivite!: string;

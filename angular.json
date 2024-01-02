@@ -202,7 +202,7 @@
               "/#/phones/marque/Alcatel",
               "/#/blog",
               "/#/apropos",
-              "/#faq",
+              "/#/faq",
               "/#/contact"
             ],
             "guessRoutes": false
@@ -211,6 +211,10 @@
             "production": {
               "browserTarget": "camerphone:build:production",
               "serverTarget": "camerphone:server:production"
+            },
+            "staging": {
+              "browserTarget": "camerphone:build:staging",
+              "serverTarget": "camerphone:server:staging"
             },
             "development": {
               "browserTarget": "camerphone:build:development",
