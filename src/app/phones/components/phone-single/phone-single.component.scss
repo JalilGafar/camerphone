@@ -1,5 +1,5 @@
 .imgPhone {
-    max-width: 200px;
+    max-width: 300px;
 }
 
 :host ::ng-deep .p-galleria .p-galleria-thumbnail-container{
@@ -19,6 +19,14 @@
     }
 }
 
+.etat {
+    background-color: #fcfcba; 
+    padding: 10px; 
+    font-weight: 700; 
+    font-size: larger; 
+    border-radius: 18px;
+    color: #363636;
+}
 p-button > button
 
 p-button > button, .p-button-success {
@@ -35,7 +43,7 @@ p-button > button, .p-button-success {
 }
 
 .h-content > h2 {
-    margin-top: 40px;
+    margin-top: 20px;
     font-weight: 600;
 
 }
@@ -154,6 +162,11 @@ app-phone {
         display: block;
         width: auto;
         text-align: center;
+    }
+
+    app-phone {
+        width: initial;
+        margin: 5px;
     }
 }
 

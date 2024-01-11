@@ -13,6 +13,18 @@
 .preview-title{
     margin-bottom: 30px;
 }
+
+.descript {
+    p{
+        text-align: justify !important;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    ul {
+        text-align: justify;
+    }
+}
+
 app-phone {
     width: 42%;
     margin: 5px;

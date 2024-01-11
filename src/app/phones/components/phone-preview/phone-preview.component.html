@@ -92,13 +92,13 @@
 <p-progressSpinner *ngIf="loading$ | async; else phoneGroup"></p-progressSpinner>
 <ng-template #phoneGroup>   
     <div class="fuler">
-        <h3 class="preview-title">Nos offres spéciales 2023</h3>
+        <h3 class="preview-title">Nos offres spéciales 2024</h3>
         <div class="card-container">
             <app-phone *ngFor="let phonei of phones$ |async" [phone]="phonei"></app-phone>
         </div>
         <button routerLink="/phones/marque/special">Voir la suite</button>
     </div>
-    <div class="fuler" *ngIf="apple$">
+    <div class="fuler" *ngIf="(apple$ | async)?.length!==0;">
         <h3 class="preview-title">Nos Produits Apple</h3>
         <div class="card-container">
             <app-phone *ngFor="let phonei of apple$ | async" [phone]="phonei"></app-phone>
@@ -107,7 +107,7 @@
             <button routerLink="/phones/marque/Apple" >Voir la suite</button>
         </a>
     </div>
-    <div class="fuler" *ngIf="samsung$">
+    <div class="fuler" *ngIf="(samsung$ | async)?.length!==0;">
         <h3 class="preview-title">Nos Produits Samsung</h3>
         <div class="card-container">
             <app-phone *ngFor="let phonei of samsung$ | async" [phone]="phonei"></app-phone>
@@ -116,7 +116,7 @@
             <button routerLink="/phones/marque/Samsung" >Voir la suite</button>
         </a>
     </div>
-    <div class="fuler" *ngIf="huawei$">
+    <div class="fuler" *ngIf="(huawei$ | async)?.length!==0;">
         <h3 class="preview-title">Nos Produits Huawei</h3>
         <div class="card-container">
             <app-phone *ngFor="let phonei of huawei$ | async" [phone]="phonei"></app-phone>
@@ -125,7 +125,7 @@
             <button routerLink="/phones/marque/Huawei" >Voir la suite</button>
         </a>
     </div>
-    <div class="fuler" *ngIf="google$">
+    <div class="fuler" *ngIf="(google$ | async)?.length!==0;">
         <h3 class="preview-title">Nos Produits Google</h3>
         <div class="card-container">
             <app-phone *ngFor="let phonei of google$ | async" [phone]="phonei"></app-phone>
@@ -134,7 +134,7 @@
             <button routerLink="/phones/marque/Google" >Voir la suite</button>
         </a>
     </div>
-    <div class="fuler" *ngIf="xiaomi$">
+    <div class="fuler" *ngIf="(xiaomi$ | async)?.length!==0;">
         <h3 class="preview-title">Nos Produits Xiaomi</h3>
         <div class="card-container">
             <app-phone *ngFor="let phonei of xiaomi$ | async" [phone]="phonei"></app-phone>
@@ -143,7 +143,34 @@
             <button routerLink="/phones/marque/Xiaomi" >Voir la suite</button>
         </a>
     </div>
-    <div class="fuler" *ngIf="infinix$">
+    <div class="fuler" *ngIf="(honor$ | async)?.length!==0;">
+        <h3 class="preview-title">Nos Produits Honor</h3>
+        <div class="card-container">
+            <app-phone *ngFor="let phonei of honor$ | async" [phone]="phonei"></app-phone>
+        </div>
+        <a>
+            <button routerLink="/phones/marque/Honor" >Voir la suite</button>
+        </a>
+    </div>
+    <div class="fuler" *ngIf="(oppo$ | async)?.length!==0;">
+        <h3 class="preview-title">Nos Produits Oppo</h3>
+        <div class="card-container">
+            <app-phone *ngFor="let phonei of oppo$ | async" [phone]="phonei"></app-phone>
+        </div>
+        <a>
+            <button routerLink="/phones/marque/Oppo" >Voir la suite</button>
+        </a>
+    </div>
+    <div class="fuler" *ngIf="(vivo$ | async)?.length!==0;">
+        <h3 class="preview-title">Nos Produits Vivo</h3>
+        <div class="card-container">
+            <app-phone *ngFor="let phonei of vivo$ | async" [phone]="phonei"></app-phone>
+        </div>
+        <a>
+            <button routerLink="/phones/marque/Vivo" >Voir la suite</button>
+        </a>
+    </div>
+    <div class="fuler" *ngIf="(infinix$ | async)?.length!==0;">
         <h3 class="preview-title">Nos Produits Infinix</h3>
         <div class="card-container" >
             <app-phone *ngFor="let phonei of infinix$ | async" [phone]="phonei"></app-phone>
@@ -152,7 +179,7 @@
             <button routerLink="/phones/marque/Infinix" >Voir la suite</button>
         </a>
     </div>
-    <div class="fuler" *ngIf="tecno$">
+    <div class="fuler" *ngIf="(tecno$ | async)?.length!==0;">
         <h3 class="preview-title">Nos Produits Tecno</h3>
         <div class="card-container">
             <app-phone *ngFor="let phonei of tecno$ | async" [phone]="phonei"></app-phone>
@@ -161,7 +188,7 @@
             <button routerLink="/phones/marque/Tecno" >Voir la suite</button>
         </a>
     </div>
-    <div class="fuler" *ngIf="itel$">
+    <div class="fuler" *ngIf="(itel$ | async)?.length!==0;">
         <h3 class="preview-title">Nos Produits Itel</h3>
         <div class="card-container">
             <app-phone *ngFor="let phonei of itel$ | async" [phone]="phonei"></app-phone>
@@ -170,16 +197,25 @@
             <button routerLink="/phones/marque/Itel" >Voir la suite</button>
         </a>
     </div>
-    <div class="fuler" *ngIf="alcatel$">
-        <h3 class="preview-title">Nos Produits Alcatel</h3>
+    <div class="fuler" *ngIf="(motorola$ | async)?.length!==0;">
+        <h3 class="preview-title">Nos Produits Motorola</h3>
         <div class="card-container">
-            <app-phone *ngFor="let phonei of alcatel$ | async" [phone]="phonei"></app-phone>
+            <app-phone *ngFor="let phonei of motorola$ | async" [phone]="phonei"></app-phone>
         </div>
         <a>
-            <button routerLink="/phones/marque/Alcatel" >Voir la suite</button>
+            <button routerLink="/phones/marque/Motorola" >Voir la suite</button>
         </a>
     </div>
-    <div class="fuler" *ngIf="lg$">
+    <div class="fuler" *ngIf="(realme$ | async)?.length!==0;">
+        <h3 class="preview-title">Nos Produits Realme</h3>
+        <div class="card-container">
+            <app-phone *ngFor="let phonei of realme$ | async" [phone]="phonei"></app-phone>
+        </div>
+        <a>
+            <button routerLink="/phones/marque/Realme" >Voir la suite</button>
+        </a>
+    </div>
+    <div class="fuler" *ngIf="(lg$ | async)?.length!==0;">
         <h3 class="preview-title">Nos Produits LG</h3>
         <div class="card-container">
             <app-phone *ngFor="let phonei of lg$ | async" [phone]="phonei"></app-phone>
@@ -189,3 +225,4 @@
         </a>
     </div>
 </ng-template>
+    

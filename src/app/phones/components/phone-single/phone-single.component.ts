@@ -59,6 +59,8 @@ export class PhoneSingleComponent implements OnInit, AfterViewInit, OnDestroy{
     }
   }
 
+
+  
   ngOnInit(): void {
     //takeUntil(componetDestroyed(this))
     //get all phones color of same model but different series
@@ -159,16 +161,6 @@ export class PhoneSingleComponent implements OnInit, AfterViewInit, OnDestroy{
   ngAfterViewInit(): void {
     this.mainService.scrollTo('header', BEHAVIOR.auto)
     //console.log(this.images)
-  }
-
-  goUp() {
-    this.mainService.scrollTo('header', BEHAVIOR.auto)
-    const element = document.getElementById("boss");
-    console.log("wow !")
-    if (element) {  
-      console.log("Kiii !")    
-      element.scrollIntoView();
-    }
   }
 
 }

@@ -1,9 +1,10 @@
 <p-card header={{name}}
         [subheader]="" 
         class="card-content"
+        href="#header"
         (click)="showPhoneDet(phone.id_phone)">
     <ng-template pTemplate="header">
-        <img ngOptimizedImage class="imgPhone" alt="Card" [src]="imglocation" />
+        <img ngOptimizedImage loading="lazy" class="imgPhone" alt="Card" [src]="imglocation" />
     </ng-template>
     <h3> </h3>
     <span>{{phone.rom}}GB ROM - </span>
@@ -11,7 +12,9 @@
     <span>{{phone.sim}}SIM -</span>
     <span>{{phone.camera}} </span>
     <ng-template pTemplate="footer">
-        <span class="prix-aff">{{ phone.prix| currency: 'XAF'  }}  </span>
-        <span class="prix-prom" >  {{ phone.promo| currency: 'XAF' }}</span>
+        <span class="prix-aff">{{ phone.prix| currency: 'XAF'  }}  </span><br>
+        <span class="prix-prom" >  {{ phone.promo| currency: 'XAF' }}</span><br>
+        <span class="etat" *ngIf="phone.etat ==='neuf'" > Neuf</span>
+        <span class="etat" *ngIf="phone.etat ==='occasion'" > 2<sup>nd</sup> main  </span>
     </ng-template>
 </p-card>

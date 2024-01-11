@@ -1,7 +1,11 @@
-<p-progressSpinner *ngIf="loading$ | async"></p-progressSpinner>
+<div style="text-align: center;">
+    <p-progressSpinner *ngIf="loading$ | async" strokeWidth="6"></p-progressSpinner>
+</div>
 <ng-container *ngIf="phones$">
     <div class="fuler">
         <h3 class="preview-title">{{marque}}</h3>
+        <div class="descript" style="text-align: justify; padding-left: 10px; padding-right: 10px; font-size: 0.9rem;" [innerHTML]="texto">
+        </div>  
         <div class="card-container">
             <app-phone *ngFor="let phonei of phones$ | async" [phone]="phonei"></app-phone>
         </div>

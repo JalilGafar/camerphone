@@ -17,13 +17,17 @@ export class PhonePreviewComponent implements OnInit {
   huawei$!: Observable<Phone[]>;
   apple$!: Observable<Phone[]>;
   xiaomi$!: Observable<Phone[]>;
+  honor$!: Observable<Phone[]>;
+  oppo$!: Observable<Phone[]>;
+  vivo$!: Observable<Phone[]>;
   tecno$!: Observable<Phone[]>;
   itel$!: Observable<Phone[]>;
-  alcatel$!: Observable<Phone[]>;
+  realme$!: Observable<Phone[]>;
+  motorola$!: Observable<Phone[]>;
   lg$!: Observable<Phone[]>;
   infinix$!: Observable<Phone[]>;
   google$!: Observable<Phone[]>;
-  marques = ['Samsung', 'Apple', 'Huawei', 'Xiaomi', 'Google Pixel', 'Honor', 'Oppo', 'Vivo', 'Infinix', 'Tecno','Itel', 'Realme', 'Sparx', 'Motorola', 'LG']
+  marques = ['Samsung', 'Apple', 'Huawei', 'Xiaomi', 'Google', 'Honor', 'Oppo', 'Vivo', 'Infinix', 'Tecno','Itel', 'Realme', 'Motorola', 'LG']
   budget = [50000, 100000, 150000, 200000, 250000, 300000];
   ram = [2, 3, 4, 6, 8, 16];
   rom = [32, 64, 128, 256];
@@ -39,6 +43,10 @@ export class PhonePreviewComponent implements OnInit {
       map(phones => phones.filter(phone => phone.mention === 'special')),
       map(phonefilter => phonefilter.slice(0, 4) )
     );
+    this.apple$ = this.phoneService.phone$.pipe(
+      map(phones => phones.filter(phone => phone.marque === 'Apple')),
+      map(phonefilter => phonefilter.slice(0, 4) )
+    );
     this.samsung$ = this.phoneService.phone$.pipe(
       map(phones => phones.filter(phone => phone.marque === 'Samsung')),
       map(phonefilter => phonefilter.slice(0, 4) )
@@ -51,6 +59,18 @@ export class PhonePreviewComponent implements OnInit {
       map(phones => phones.filter(phone => phone.marque === 'Xiaomi')),
       map(phonefilter => phonefilter.slice(0, 4) )
     );
+    this.honor$ = this.phoneService.phone$.pipe(
+      map(phones => phones.filter(phone => phone.marque === 'Honor')),
+      map(phonefilter => phonefilter.slice(0, 4) )
+    );
+    this.oppo$ = this.phoneService.phone$.pipe(
+      map(phones => phones.filter(phone => phone.marque === 'Oppo')),
+      map(phonefilter => phonefilter.slice(0, 4) )
+    );
+    this.vivo$ = this.phoneService.phone$.pipe(
+      map(phones => phones.filter(phone => phone.marque === 'Vivo')),
+      map(phonefilter => phonefilter.slice(0, 4) )
+    );
     this.tecno$ = this.phoneService.phone$.pipe(
       map(phones => phones.filter(phone => phone.marque === 'Tecno')),
       map(phonefilter => phonefilter.slice(0, 4) )
@@ -59,8 +79,8 @@ export class PhonePreviewComponent implements OnInit {
       map(phones => phones.filter(phone => phone.marque === 'Itel')),
       map(phonefilter => phonefilter.slice(0, 4) )
     );
-    this.alcatel$ = this.phoneService.phone$.pipe(
-      map(phones => phones.filter(phone => phone.marque === 'Alcatel')),
+    this.realme$ = this.phoneService.phone$.pipe(
+      map(phones => phones.filter(phone => phone.marque === 'Realme')),
       map(phonefilter => phonefilter.slice(0, 4) )
     );
     this.lg$ = this.phoneService.phone$.pipe(
@@ -69,6 +89,10 @@ export class PhonePreviewComponent implements OnInit {
     );
     this.infinix$ = this.phoneService.phone$.pipe(
       map(phones => phones.filter(phone => phone.marque === 'Infinix')),
+      map(phonefilter => phonefilter.slice(0, 4) )
+    );
+    this.motorola$ = this.phoneService.phone$.pipe(
+      map(phones => phones.filter(phone => phone.marque === 'Motorola')),
       map(phonefilter => phonefilter.slice(0, 4) )
     );
     this.google$ = this.phoneService.phone$.pipe(

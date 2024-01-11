@@ -26,5 +26,6 @@ export class PhoneComponent implements OnInit {
 
   showPhoneDet(id : number) {
     this.appRout.navigateByUrl('phones/phoneDetail/'+ id);
+    window.scrollTo(0, 0);
   }
 }

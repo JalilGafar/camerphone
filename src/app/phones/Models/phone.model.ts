@@ -30,4 +30,5 @@ export class Phone {
     mention!: string;
     comment!: string;
     version?: string;
+    visible!: string;
 }

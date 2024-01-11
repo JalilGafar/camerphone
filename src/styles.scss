@@ -4,7 +4,9 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "primeicons/primeicons.css";
 
-
+html {
+    scroll-behavior: smooth;
+  }
 
 
 body, html {

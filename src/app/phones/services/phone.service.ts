@@ -29,7 +29,7 @@ export class PhoneService {
     }
 
     getPhonesFromServer(){
-      if (Date.now() - this.lastPhonesLoad <= 60000) {
+      if (Date.now() - this.lastPhonesLoad <= 600000) {
         return;
       }
       this.setLoadingStatus(true);

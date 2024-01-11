@@ -1,5 +1,7 @@
 <div class="big-container" id="boss">
-    <p-progressSpinner *ngIf="loading$ | async "></p-progressSpinner>
+    <div style="text-align: center;">
+        <p-progressSpinner *ngIf="loading$ | async" strokeWidth="6"></p-progressSpinner>
+    </div>
     <ng-container *ngIf="imgArray" >
         <div class="card" class="h-content">
             <p-galleria [value]="imgArray" [showIndicators]="false" [showItemNavigators]="false" [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }" [circular]="true" [numVisible]="5">
@@ -16,6 +18,10 @@
     </ng-container>
     <ng-container  *ngIf="phone">
         <div class="h-content">
+            <div style="text-align: center;">               
+                <span class="etat" *ngIf="phone.etat ==='neuf'" > Neuf</span>
+                <span class="etat" *ngIf="phone.etat ==='occasion'" > 2<sup>nd</sup> main  </span>
+            </div>
             <h2> 
                 <span>{{phone.marque}} </span>  
                 <span>{{phone.model}} </span> -
@@ -71,6 +77,8 @@
                     <h3>APPELER POUR COMMANDER : </h3> <span id="call">698 18 32 97</span>
                 </div>
                 <div class="descri">
+                    <div [innerHTML]="phone.comment">
+                    </div>
                     <p>
                         Le <strong>{{phone.marque}} {{phone.model}}</strong> est un smartphone 
                         Double SIM avec le système d'exploitation <strong>{{phone.systeme}} </strong>,
@@ -129,14 +137,14 @@
                             <p-button type="submit" class="wtp" styleClass="p-button-success" (click)="WPSubmitForm()"><img src="assets/images/whatsapp_logo_new-2x.png" alt="">Commander sur WhatsApp</p-button>
                         </div>
                     </form>
-                    <div class="fuler" *ngIf="phonesPotent$" (Click)="goUp()" >
-                        <h3 class="preview-title">Vous Pouriez aimer égalemnt</h3>
-                        <div class="card-container">
-                            <app-phone *ngFor="let phonei of phonesPotent$ |async" [phone]="phonei"></app-phone>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </ng-container>
+</div>
+<div class="fuler" *ngIf="phonesPotent$"  >
+    <h3 class="preview-title">Vous Pouriez aimer égalemnt</h3>
+    <div class="card-container">
+        <app-phone *ngFor="let phonei of phonesPotent$ |async" [phone]="phonei"></app-phone>
+    </div>
 </div>
